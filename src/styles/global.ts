@@ -1,15 +1,22 @@
+// src/styles/global.ts
 import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
-  *{ box-sizing: border-box; }
-  html, body, #root{ height:100%; }
-  body{
-    margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    color: ${({theme}) => (theme as any).colors.text};
-    background: ${({theme}) => (theme as any).colors.bg};
+export const GlobalStyle = createGlobalStyle`
+  :root {
+    --max-width: ${({ theme }) => (theme as any).layout?.maxW || "1200px"};
   }
-  a{ color: inherit; text-decoration: none; }
-  img{ max-width: 100%; display: block; }
-  button{ cursor: pointer; }
-  ::selection{ background: ${({theme}) => (theme as any).colors.brand}; color: #fff; }
+
+  body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: ${({ theme }) => (theme as any).colors?.bg || "#fff"};
+  }
+
+  /* Classe utilitária para containers */
+  .section-container {
+    margin: 0 auto;
+    max-width: var(--max-width);
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 `;

@@ -1,8 +1,12 @@
 {
   "name": "bras-mol-landing",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Landing page da Bras-Mol Molas e Estampados LTDA - Montagem terceirizada de subconjuntos metálicos e plásticos.",
   "type": "module",
+  "author": "Bras-Mol Molas e Estampados LTDA",
+  "license": "MIT",
+  "homepage": "https://montagem.brasmol.com.br",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,6 +17,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@dr.pogodin/react-helmet": "^3.0.2",
     "@reduxjs/toolkit": "^2.8.2",
     "@types/styled-components": "^5.1.34",
     "axios": "^1.11.0",

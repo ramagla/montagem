@@ -1,31 +1,19 @@
 // src/components/ContactCTA.tsx
 import { useId, useMemo, useState } from "react";
+import type { MouseEvent } from "react";
 import styled, { keyframes } from "styled-components";
-
-/**
- * 🔎 Destaques:
- * - Visual “glass & gradient” com tokens do tema
- * - Ícones SVG inline (sem dependências externas)
- * - Acessibilidade (microdata, labels, sr-only, foco visível)
- * - Botões de ação com microinterações e ripple suave
- * - Links clicáveis (tel:, mailto:) e botão "copiar"
- * - Skeleton do mapa enquanto carrega
- */
 
 /* ===================== */
 /* Estilos base & helpers */
 /* ===================== */
 
 const Box = styled.section`
-  margin: 0 auto;
-  max-width: ${({ theme }) => (theme as any).layout?.maxW || "1200px"};
   padding: 60px 20px;
   position: relative;
-
-  /* Fundo com gradiente sutil */
   background:
     radial-gradient(1200px 300px at 10% -20%, rgba(0,0,0,0.04), transparent),
     radial-gradient(1000px 300px at 110% 0%, rgba(0,0,0,0.04), transparent);
+  scroll-margin-top: 80px;
 
   @media (max-width: 980px) {
     padding: 40px 16px;
@@ -151,17 +139,19 @@ const ActionBtn = styled.a`
   &:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgba(0,0,0,.06); }
   &:active { transform: translateY(0); }
 
-  /* Ripple suave */
-  &::after{
-    content: "";
-    position: absolute; inset: 0;
-    border-radius: inherit;
-    opacity: 0; transform: scale(.96);
-    transition: opacity .25s, transform .25s;
-    background: radial-gradient(120px 120px at var(--x,50%) var(--y,50%), rgba(0,0,0,.06), transparent 60%);
-    pointer-events: none;
+  /* Ripple suave (respeita prefers-reduced-motion) */
+  @media (prefers-reduced-motion: no-preference) {
+    &::after{
+      content: "";
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      opacity: 0; transform: scale(.96);
+      transition: opacity .25s, transform .25s;
+      background: radial-gradient(120px 120px at var(--x,50%) var(--y,50%), rgba(0,0,0,.06), transparent 60%);
+      pointer-events: none;
+    }
+    &:hover::after{ opacity: 1; transform: scale(1); }
   }
-  &:hover::after{ opacity: 1; transform: scale(1); }
 `;
 
 const PrimaryBtn = styled(ActionBtn)`
@@ -206,7 +196,6 @@ const SrOnly = styled.span`
 /* ===================== */
 /* Ícones SVG (inline)   */
 /* ===================== */
-
 function IconBuilding() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
@@ -261,7 +250,7 @@ function IconWaze() {
 /* Constantes            */
 /* ===================== */
 
-const ENDERECO_TXT = "Estrada Bonsucesso, 1953 - Rio Abaixo, Itaquaquecetuba - SP";
+const ENDERECO_TXT = "Estrada Bonsucesso, 1953 - Rio Abaixo, Itaquaquecetuba";
 const NOME_EMPRESA = "Bras-Mol Molas e Estampados LTDA";
 const CNPJ = "61.296.901/0002-48";
 const FONE = "(11) 4648-2611";
@@ -281,7 +270,7 @@ export default function ContactCTA() {
   const mapId = useId();
   const [mapLoaded, setMapLoaded] = useState(false);
 
-  // Microdata p/ SEO local
+  // JSON-LD p/ SEO local (Organization + ContactPoint)
   const orgSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -295,11 +284,18 @@ export default function ContactCTA() {
       "addressCountry": "BR"
     },
     "telephone": "+551146482611",
-    "email": EMAIL_VENDAS
+    "email": EMAIL_VENDAS,
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": "+551146482611",
+      "contactType": "customer service",
+      "areaServed": "BR",
+      "availableLanguage": ["Portuguese"]
+    }]
   }), []);
 
-  // Handler para ripple baseado no mouse
-  const onRipple = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  // Ripple (com tipagem enxuta)
+  const onRipple = (e: MouseEvent<HTMLAnchorElement>) => {
     const rect = (e.currentTarget as HTMLAnchorElement).getBoundingClientRect();
     (e.currentTarget as HTMLAnchorElement).style.setProperty("--x", `${e.clientX - rect.left}px`);
     (e.currentTarget as HTMLAnchorElement).style.setProperty("--y", `${e.clientY - rect.top}px`);
@@ -318,122 +314,127 @@ export default function ContactCTA() {
 
   return (
     <Box id="contato" aria-labelledby="contato-title">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-      <Header>
-        <Eyebrow aria-hidden="true">
-          <IconWrap><IconBuilding /></IconWrap>
-          Contato oficial
-        </Eyebrow>
-        <Title id="contato-title">Fale com a Bras-Mol</Title>
-        <Subtitle>Entre em contato por telefone ou e-mail, ou trace sua rota pelo mapa.</Subtitle>
-      </Header>
+      <div className="container">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+        <Header>
+          <Eyebrow aria-hidden="true">
+            <IconWrap><IconBuilding /></IconWrap>
+            Contato oficial
+          </Eyebrow>
+          <Title id="contato-title">Fale com a Bras-Mol</Title>
+          <Subtitle>Entre em contato por telefone ou e-mail, ou trace sua rota pelo mapa.</Subtitle>
+        </Header>
 
-      <Grid>
-        {/* Card de informações */}
-        <Card itemScope itemType="https://schema.org/Organization" aria-labelledby="info-title">
-          <CardHeader>
-            <Badge aria-hidden="true"><IconBuilding /></Badge>
-            <CardTitle id="info-title">{NOME_EMPRESA}</CardTitle>
-          </CardHeader>
+        <Grid>
+          {/* Card de informações */}
+          <Card itemScope itemType="https://schema.org/Organization" aria-labelledby="info-title">
+            <CardHeader>
+              <Badge aria-hidden="true"><IconBuilding /></Badge>
+              <CardTitle id="info-title">{NOME_EMPRESA}</CardTitle>
+            </CardHeader>
 
-          <List>
-            <dt>CNPJ</dt>
-            <dd>
-              <span itemProp="taxID">{CNPJ}</span>
-              <button
-                type="button"
-                onClick={() => copyToClipboard(CNPJ)}
-                aria-label="Copiar CNPJ"
-                style={{
-                  border: "1px solid rgba(0,0,0,.08)",
-                  background: "transparent",
-                  borderRadius: 8,
-                  padding: "4px 6px",
-                  cursor: "pointer",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6
-                }}
+            <List>
+              <dt>CNPJ</dt>
+              <dd>
+                <span itemProp="taxID">{CNPJ}</span>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(CNPJ)}
+                  aria-label={`Copiar CNPJ ${CNPJ}`}
+                  style={{
+                    border: "1px solid rgba(0,0,0,.08)",
+                    background: "transparent",
+                    borderRadius: 8,
+                    padding: "4px 6px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6
+                  }}
+                >
+                  <IconCopy /> <span style={{fontSize:12,fontWeight:700}}>Copiar</span>
+                </button>
+              </dd>
+
+              <dt>Endereço</dt>
+              <dd>
+                <IconWrap aria-hidden="true"><IconMapPin /></IconWrap>
+                <span itemProp="address">{ENDERECO_TXT}</span>
+              </dd>
+
+              <dt>Cidade/UF</dt>
+              <dd>Itaquaquecetuba / SP</dd>
+
+              <dt>Telefone</dt>
+              <dd>
+                <IconWrap aria-hidden="true"><IconPhone /></IconWrap>
+                <a href={telHref} itemProp="telephone" aria-label={`Ligar para ${FONE}`}>{FONE}</a>
+              </dd>
+
+              <dt>E-mail SAC</dt>
+              <dd>
+                <IconWrap aria-hidden="true"><IconMail /></IconWrap>
+                <a href={`mailto:${EMAIL_SAC}`} itemProp="email">{EMAIL_SAC}</a>
+              </dd>
+
+              <dt>E-mail Vendas</dt>
+              <dd>
+                <IconWrap aria-hidden="true"><IconMail /></IconWrap>
+                <a href={`mailto:${EMAIL_VENDAS}`} itemProp="email">{EMAIL_VENDAS}</a>
+              </dd>
+            </List>
+
+            <SrOnly>As informações acima incluem CNPJ, endereço, telefone e e-mails de contato.</SrOnly>
+          </Card>
+
+          {/* Card do mapa + ações */}
+          <Card aria-labelledby={`${mapId}-title`}>
+            <CardHeader>
+              <Badge aria-hidden="true"><IconMapPin /></Badge>
+              <CardTitle id={`${mapId}-title`}>Localização e rotas</CardTitle>
+            </CardHeader>
+
+            <MapBox>
+              {!mapLoaded && <div className="skeleton" aria-hidden="true" />}
+              <iframe
+                title="Mapa - Bras-Mol"
+                src={GMAPS_EMBED}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                onLoad={() => setMapLoaded(true)}
+              />
+            </MapBox>
+
+            <Actions>
+              <PrimaryBtn
+                href={GMAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir no Google Maps em nova aba"
+                onMouseMove={onRipple}
               >
-                <IconCopy /> <span style={{fontSize:12,fontWeight:700}}>Copiar</span>
-              </button>
-            </dd>
+                <IconWrap><IconGMaps /></IconWrap>
+                Google Maps
+              </PrimaryBtn>
 
-            <dt>Endereço</dt>
-            <dd>
-              <IconWrap aria-hidden="true"><IconMapPin /></IconWrap>
-              <span itemProp="address">{ENDERECO_TXT}</span>
-            </dd>
-
-            <dt>Cidade/UF</dt>
-            <dd>Itaquaquecetuba / SP</dd>
-
-            <dt>Telefone</dt>
-            <dd>
-              <IconWrap aria-hidden="true"><IconPhone /></IconWrap>
-              <a href={telHref} itemProp="telephone" aria-label={`Ligar para ${FONE}`}>{FONE}</a>
-            </dd>
-
-            <dt>E-mail SAC</dt>
-            <dd>
-              <IconWrap aria-hidden="true"><IconMail /></IconWrap>
-              <a href={`mailto:${EMAIL_SAC}`} itemProp="email">{EMAIL_SAC}</a>
-            </dd>
-
-            <dt>E-mail Vendas</dt>
-            <dd>
-              <IconWrap aria-hidden="true"><IconMail /></IconWrap>
-              <a href={`mailto:${EMAIL_VENDAS}`} itemProp="email">{EMAIL_VENDAS}</a>
-            </dd>
-          </List>
-
-          <SrOnly>As informações acima incluem CNPJ, endereço, telefone e e-mails de contato.</SrOnly>
-        </Card>
-
-        {/* Card do mapa + ações */}
-        <Card aria-labelledby={`${mapId}-title`}>
-          <CardHeader>
-            <Badge aria-hidden="true"><IconMapPin /></Badge>
-            <CardTitle id={`${mapId}-title`}>Localização e rotas</CardTitle>
-          </CardHeader>
-
-          <MapBox>
-            {!mapLoaded && <div className="skeleton" aria-hidden="true" />}
-            <iframe
-              title="Mapa - Bras-Mol"
-              src={GMAPS_EMBED}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-              onLoad={() => setMapLoaded(true)}
-            />
-          </MapBox>
-
-          <Actions>
-            <PrimaryBtn
-              href={GMAPS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Abrir no Google Maps em nova aba"
-              onMouseMove={onRipple}
-            >
-              <IconWrap><IconGMaps /></IconWrap>
-              Google Maps
-            </PrimaryBtn>
-
-            <ActionBtn
-              href={WAZE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Abrir no Waze em nova aba"
-              onMouseMove={onRipple}
-            >
-              <IconWrap><IconWaze /></IconWrap>
-              Waze
-            </ActionBtn>
-          </Actions>
-        </Card>
-      </Grid>
+              <ActionBtn
+                href={WAZE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir no Waze em nova aba"
+                onMouseMove={onRipple}
+              >
+                <IconWrap><IconWaze /></IconWrap>
+                Waze
+              </ActionBtn>
+            </Actions>
+          </Card>
+        </Grid>
+      </div>
     </Box>
   );
 }

@@ -5,115 +5,194 @@ const Wrap = styled.section`
   background: #fff;
   border-top: 1px solid ${({ theme }) => (theme as any).colors.border};
   padding: 60px 0;
+  scroll-margin-top: 80px;
+
+  @media (max-width: 768px) {
+    padding: 48px 0;
+  }
+`;
+
+const Head = styled.header`
+  display: grid; gap: 6px; margin-bottom: 20px;
+
+  h2 {
+    font-size: clamp(24px, 4vw, 36px);
+    font-weight: 800;
+    margin: 0;
+  }
+  p {
+    margin: 0; opacity: .85;
+  }
+`;
+
+const BadgeRow = styled.div`
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
+`;
+
+const IconCircle = styled.div`
+  width: 48px; height: 48px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px; background: #f8f9fa;
+  border: 1px solid ${({ theme }) => (theme as any).colors.border};
+`;
+
+const Card = styled.article`
+  height: 100%;
+  border: 1px solid ${({ theme }) => (theme as any).colors.border};
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  background: #fff;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0,0,0,.08);
+    border-color: rgba(0,0,0,.06);
+  }
+
+  &:focus-within {
+    outline: 2px solid ${({ theme }) => (theme as any).colors.brand || "#d00"};
+    outline-offset: 2px;
+  }
+`;
+
+const CardBody = styled.div`
+  padding: 18px 18px 16px;
+`;
+
+const Name = styled.h3`
+  font-size: 18px; margin: 10px 0 8px; font-weight: 700;
+`;
+
+const Desc = styled.p`
+  margin: 0 0 12px; color: #6c757d;
+`;
+
+const Bullets = styled.ul`
+  margin: 0; padding-left: 0; list-style: none; color: #6c757d;
+  li { display: flex; align-items: center; gap: 8px; }
+`;
+
+const Secondary = styled.div`
+  margin-top: 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+
+  small { color: #6c757d; }
 `;
 
 export default function Services() {
   return (
-    <Wrap id="servicos">
+    <Wrap id="servicos" aria-labelledby="servicos-title">
       <div className="container">
+
         {/* Cabeçalho */}
-        <div className="row align-items-end g-3 mb-4">
+        <div className="row align-items-end g-3 mb-3">
           <div className="col-md-8">
-            <h2 className="h1 mb-2">Serviços de montagem</h2>
-            <p className="text-muted mb-0">
-              Montagem terceirizada de <strong>conjuntos metálicos e plásticos</strong> com
-              padronização, rastreabilidade e registros de qualidade.
-            </p>
+            <Head>
+              <span className="visually-hidden" id="servicos-title">Serviços</span>
+              <h2>Serviços de montagem</h2>
+              <p>
+                Montagem terceirizada de <strong>conjuntos metálicos e plásticos</strong> com
+                padronização, rastreabilidade e registros de qualidade.
+              </p>
+            </Head>
           </div>
-          <div className="col-md-4 d-flex gap-2 justify-content-md-end">
-            <span className="badge text-bg-light border">Rastreabilidade</span>
-            <span className="badge text-bg-light border">Teste funcional</span>
-            <span className="badge text-bg-light border">Embalagem final</span>
+          <div className="col-md-4">
+            <BadgeRow>
+              <span className="badge text-bg-light border">Rastreabilidade</span>
+              <span className="badge text-bg-light border">Teste funcional</span>
+              <span className="badge text-bg-light border">Embalagem final</span>
+            </BadgeRow>
           </div>
         </div>
 
         {/* Grid de serviços (cards) */}
-        <div className="row g-4">
-          <div className="col-md-6 col-lg-3">
-            <div className="card h-100 shadow-sm border-0">
-              <div className="card-body">
-                <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3" style={{width:48, height:48}}>
+        <div className="row g-4" role="list">
+          <div className="col-md-6 col-lg-3" role="listitem">
+            <Card itemScope itemType="https://schema.org/Service">
+              <CardBody>
+                <IconCircle aria-hidden="true" className="mb-3">
                   <i className="bi bi-tools fs-5"></i>
-                </div>
-                <h3 className="h5">Fixação & Montagem</h3>
-                <p className="text-muted mb-3">
+                </IconCircle>
+                <Name itemProp="name">Fixação &amp; Montagem</Name>
+                <Desc itemProp="description">
                   Crimpagem, rebitagem, parafusos e fixadores com controle de sequência.
-                </p>
-                <ul className="list-unstyled small text-muted mb-0">
-                  <li className="d-flex gap-2"><i className="bi bi-check2-circle"></i> Poka-yoke</li>
-                  <li className="d-flex gap-2"><i className="bi bi-check2-circle"></i> Torque/força padrão</li>
-                </ul>
-              </div>
-            </div>
+                </Desc>
+                <Bullets className="small">
+                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Poka-yoke</li>
+                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Torque/força padrão</li>
+                </Bullets>
+              </CardBody>
+            </Card>
           </div>
 
-          <div className="col-md-6 col-lg-3">
-            <div className="card h-100 shadow-sm border-0">
-              <div className="card-body">
-                <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3" style={{width:48, height:48}}>
+          <div className="col-md-6 col-lg-3" role="listitem">
+            <Card itemScope itemType="https://schema.org/Service">
+              <CardBody>
+                <IconCircle aria-hidden="true" className="mb-3">
                   <i className="bi bi-droplet-half fs-5"></i>
-                </div>
-                <h3 className="h5">Adesivos & Insertos</h3>
-                <p className="text-muted mb-3">
+                </IconCircle>
+                <Name itemProp="name">Adesivos &amp; Insertos</Name>
+                <Desc itemProp="description">
                   Aplicação de adesivos, fitas e insertos conforme especificação técnica.
-                </p>
-                <ul className="list-unstyled small text-muted mb-0">
-                  <li className="d-flex gap-2"><i className="bi bi-check2-circle"></i> Tempo de cura</li>
-                  <li className="d-flex gap-2"><i className="bi bi-check2-circle"></i> Padronização visual</li>
-                </ul>
-              </div>
-            </div>
+                </Desc>
+                <Bullets className="small">
+                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Tempo de cura</li>
+                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Padronização visual</li>
+                </Bullets>
+              </CardBody>
+            </Card>
           </div>
 
-          <div className="col-md-6 col-lg-3">
-            <div className="card h-100 shadow-sm border-0">
-              <div className="card-body">
-                <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3" style={{width:48, height:48}}>
+          <div className="col-md-6 col-lg-3" role="listitem">
+            <Card itemScope itemType="https://schema.org/Service">
+              <CardBody>
+                <IconCircle aria-hidden="true" className="mb-3">
                   <i className="bi bi-clipboard2-check fs-5"></i>
-                </div>
-                <h3 className="h5">Inspeção & Testes</h3>
-                <p className="text-muted mb-3">
+                </IconCircle>
+                <Name itemProp="name">Inspeção &amp; Testes</Name>
+                <Desc itemProp="description">
                   Teste funcional e dimensional com registros por lote e amostra.
-                </p>
-                <ul className="list-unstyled small text-muted mb-0">
-                  <li className="d-flex gap-2"><i className="bi bi-check2-circle"></i> Plano de controle</li>
-                  <li className="d-flex gap-2"><i className="bi bi-check2-circle"></i> Rastreabilidade</li>
-                </ul>
-              </div>
-            </div>
+                </Desc>
+                <Bullets className="small">
+                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Plano de controle</li>
+                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Rastreabilidade</li>
+                </Bullets>
+              </CardBody>
+            </Card>
           </div>
 
-          <div className="col-md-6 col-lg-3">
-            <div className="card h-100 shadow-sm border-0">
-              <div className="card-body">
-                <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3" style={{width:48, height:48}}>
+          <div className="col-md-6 col-lg-3" role="listitem">
+            <Card itemScope itemType="https://schema.org/Service">
+              <CardBody>
+                <IconCircle aria-hidden="true" className="mb-3">
                   <i className="bi bi-box-seam fs-5"></i>
-                </div>
-                <h3 className="h5">Embalagem & Identificação</h3>
-                <p className="text-muted mb-3">
+                </IconCircle>
+                <Name itemProp="name">Embalagem &amp; Identificação</Name>
+                <Desc itemProp="description">
                   Etiquetagem, embalagem final e identificação conforme cliente.
-                </p>
-                <ul className="list-unstyled small text-muted mb-0">
-                  <li className="d-flex gap-2"><i className="bi bi-check2-circle"></i> Lote/cliente</li>
-                  <li className="d-flex gap-2"><i className="bi bi-check2-circle"></i> Documentos de envio</li>
-                </ul>
-              </div>
-            </div>
+                </Desc>
+                <Bullets className="small">
+                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Lote/cliente</li>
+                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Documentos de envio</li>
+                </Bullets>
+              </CardBody>
+            </Card>
           </div>
         </div>
 
         {/* Chamada secundária */}
-        <div className="mt-4 d-flex align-items-center justify-content-between flex-wrap gap-3">
-          <div className="d-flex align-items-center gap-2 text-muted">
-            <i className="bi bi-info-circle"></i>
-            <small>
-              Processos padronizados, instruções visuais e registros auditáveis.
-            </small>
+        <Secondary>
+          <div className="d-flex align-items-center gap-2">
+            <i className="bi bi-info-circle" aria-hidden="true"></i>
+            <small>Processos padronizados, instruções visuais e registros auditáveis.</small>
           </div>
           <a href="#contato" className="btn btn-outline-danger">
-            <i className="bi bi-envelope-fill me-1"></i> Contato
+            <i className="bi bi-envelope-fill me-1" aria-hidden="true"></i>
+            Contato
           </a>
-        </div>
+        </Secondary>
       </div>
     </Wrap>
   );

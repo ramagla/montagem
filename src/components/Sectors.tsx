@@ -2,72 +2,119 @@
 import styled from "styled-components";
 
 const Wrap = styled.section`
-  margin: 0 auto;
-  max-width: ${({ theme }) => (theme as any).layout.maxW};
   padding: 60px 16px;
+  scroll-margin-top: 80px;
+
+  @media (max-width: 768px) {
+    padding: 48px 16px;
+  }
+`;
+
+const Head = styled.header`
+  text-align: center;
+  margin-bottom: 28px;
+
+  h2 {
+    margin: 0 0 10px;
+    font-size: clamp(24px, 4.2vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  p {
+    margin: 0;
+    color: #6c757d;
+    opacity: .95;
+  }
+`;
+
+const Card = styled.article`
+  height: 100%;
+  border: 1px solid ${({ theme }) => (theme as any).colors.border};
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  padding: 20px;
+  text-align: center;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0,0,0,.08);
+    border-color: rgba(0,0,0,.06);
+  }
+
+  &:focus-within {
+    outline: 2px solid ${({ theme }) => (theme as any).colors.brand || "#d00"};
+    outline-offset: 2px;
+  }
+`;
+
+const IconCircle = styled.div`
+  width: 60px; height: 60px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 999px;
+  background: #f8f9fa;
+  border: 1px solid ${({ theme }) => (theme as any).colors.border};
+`;
+
+const Name = styled.h3`
+  font-size: 18px;
+  margin: 12px 0 8px;
+  font-weight: 700;
+`;
+
+const Desc = styled.p`
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.95rem;
 `;
 
 export default function Sectors() {
+  const sectors = [
+    {
+      icon: "bi-truck",
+      title: "Automotivo",
+      desc: "Subconjuntos com rastreabilidade e conformidade com requisitos IATF.",
+    },
+    {
+      icon: "bi-house-gear",
+      title: "Linha Branca",
+      desc: "Conjuntos para eletrodomésticos com alto volume de produção.",
+    },
+    {
+      icon: "bi-cpu",
+      title: "Máquinas e Equipamentos",
+      desc: "Montagem de subconjuntos industriais conforme projeto técnico.",
+    },
+    {
+      icon: "bi-buildings",
+      title: "Outros",
+      desc: "Atendemos indústrias em geral mantendo o padrão de qualidade Bras-Mol.",
+    },
+  ];
+
   return (
-    <Wrap id="setores">
+    <Wrap id="setores" aria-labelledby="setores-title">
       <div className="container">
         {/* Cabeçalho */}
-        <div className="text-center mb-5">
-          <h2 className="h1 mb-3">Setores atendidos</h2>
-          <p className="text-muted mb-0">
-            Soluções de montagem sob medida para diferentes segmentos da indústria.
-          </p>
-        </div>
+        <Head>
+          <h2 id="setores-title">Setores atendidos</h2>
+          <p>Soluções de montagem sob medida para diferentes segmentos da indústria.</p>
+        </Head>
 
         {/* Grid de setores */}
-        <div className="row g-4">
-          <div className="col-md-6 col-lg-3">
-            <div className="card h-100 shadow-sm border-0 text-center p-3">
-              <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3" style={{ width: 60, height: 60 }}>
-                <i className="bi bi-truck fs-3"></i>
-              </div>
-              <h3 className="h5">Automotivo</h3>
-              <p className="text-muted small mb-0">
-                Subconjuntos com rastreabilidade e conformidade com requisitos IATF.
-              </p>
+        <div className="row g-4" role="list">
+          {sectors.map((s, i) => (
+            <div className="col-md-6 col-lg-3" role="listitem" key={i}>
+              <Card tabIndex={0}>
+                <IconCircle aria-hidden="true" className="mb-3">
+                  <i className={`bi ${s.icon} fs-3`} />
+                </IconCircle>
+                <Name>{s.title}</Name>
+                <Desc className="small">{s.desc}</Desc>
+              </Card>
             </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="card h-100 shadow-sm border-0 text-center p-3">
-              <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3" style={{ width: 60, height: 60 }}>
-                <i className="bi bi-house-gear fs-3"></i>
-              </div>
-              <h3 className="h5">Linha Branca</h3>
-              <p className="text-muted small mb-0">
-                Conjuntos para eletrodomésticos com alto volume de produção.
-              </p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="card h-100 shadow-sm border-0 text-center p-3">
-              <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3" style={{ width: 60, height: 60 }}>
-                <i className="bi bi-cpu fs-3"></i>
-              </div>
-              <h3 className="h5">Máquinas e Equipamentos</h3>
-              <p className="text-muted small mb-0">
-                Montagem de subconjuntos industriais conforme projeto técnico.
-              </p>
-            </div>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="card h-100 shadow-sm border-0 text-center p-3">
-              <div className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3" style={{ width: 60, height: 60 }}>
-                <i className="bi bi-buildings fs-3"></i>
-              </div>
-              <h3 className="h5">Outros</h3>
-              <p className="text-muted small mb-0">
-                Atendemos indústrias em geral mantendo o padrão de qualidade Bras-Mol.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </Wrap>
