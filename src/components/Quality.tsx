@@ -1,24 +1,60 @@
+// src/components/Quality.tsx
 import styled from "styled-components";
-const Box = styled.section` margin: 0 auto; max-width: ${({theme}) => (theme as any).layout.maxW}; padding: 48px 16px; `;
-const Title = styled.h2` margin: 0 0 10px; `;
-const Cards = styled.div` display:grid; gap:14px; grid-template-columns: repeat(3,1fr); @media (max-width:980px){ grid-template-columns:1fr; }`;
-const Card = styled.div`
-  background: ${({theme}) => (theme as any).colors.card};
-  border: 1px solid ${({theme}) => (theme as any).colors.border};
-  padding: 18px; border-radius: ${({theme}) => (theme as any).radius.lg};
-  box-shadow: ${({theme}) => (theme as any).shadow.sm};
-  h3{ margin:0 0 6px; font-size:18px; }
-  p{ margin:0; opacity:.85; font-size:14px; }
+
+const Box = styled.section`
+  margin: 0 auto;
+  max-width: ${({ theme }) => (theme as any).layout.maxW};
+  padding: 60px 16px;
 `;
-export default function Quality(){
+
+export default function Quality() {
+  const items = [
+    {
+      title: "ISO 9001",
+      desc: "Processos controlados e melhoria contínua.",
+      icon: "bi-patch-check-fill",
+    },
+    {
+      title: "Rastreabilidade",
+      desc: "Lotes e registros por operação e teste.",
+      icon: "bi-search",
+    },
+    {
+      title: "Documentação",
+      desc: "Plano de controle, instruções e registros auditáveis.",
+      icon: "bi-file-earmark-text",
+    },
+  ];
+
   return (
     <Box id="qualidade">
-      <Title>Qualidade & Certificações</Title>
-      <Cards>
-        <Card><h3>ISO 9001</h3><p>Processos controlados e melhoria contínua.</p></Card>
-        <Card><h3>Rastreabilidade</h3><p>Lotes e registros por operação e teste.</p></Card>
-        <Card><h3>Documentação</h3><p>Plano de controle, instruções e registros auditáveis.</p></Card>
-      </Cards>
+      <div className="container">
+        {/* Cabeçalho */}
+        <div className="text-center mb-5">
+          <h2 className="h1 mb-3">Qualidade & Certificações</h2>
+          <p className="text-muted mb-0">
+            Confiabilidade assegurada por certificações e processos robustos.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="row g-4">
+          {items.map((item, i) => (
+            <div className="col-md-6 col-lg-4" key={i}>
+              <div className="card h-100 shadow-sm border-0 p-4 text-center">
+                <div
+                  className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border mb-3"
+                  style={{ width: 60, height: 60 }}
+                >
+                  <i className={`bi ${item.icon} fs-3`}></i>
+                </div>
+                <h3 className="h5">{item.title}</h3>
+                <p className="text-muted small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </Box>
   );
 }

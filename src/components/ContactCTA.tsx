@@ -19,7 +19,7 @@ import styled, { keyframes } from "styled-components";
 const Box = styled.section`
   margin: 0 auto;
   max-width: ${({ theme }) => (theme as any).layout?.maxW || "1200px"};
-  padding: 56px 20px;
+  padding: 60px 20px;
   position: relative;
 
   /* Fundo com gradiente sutil */

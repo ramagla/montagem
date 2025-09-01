@@ -85,7 +85,7 @@ export default function Header(){
 
         <Nav className="nav nav-pills">
           <a className="nav-link" href="#servicos">
-            <i className="bi bi-gear-fill"></i> Serviços
+<i className="bi bi-gear-fill" aria-hidden="true"></i> Serviços
           </a>
           <a className="nav-link" href="#setores">
             <i className="bi bi-building"></i> Setores

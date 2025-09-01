@@ -21,7 +21,8 @@ export default function Hero() {
               Bras-Mol: velocidade, rastreabilidade e conformidade para seu subconjunto
               chegar pronto à linha de produção.
             </p>
-            <a href="#contato" className="btn btn-danger btn-lg px-4 d-inline-flex align-items-center gap-2">
+<a href="#contato" className="btn btn-lg px-4 d-inline-flex align-items-center gap-2"
+   style={{ background: "var(--brand, #d00)", color: "#fff", borderColor: "transparent" }}>
               <i className="bi bi-envelope-fill"></i> Contato
             </a>
           </div>
