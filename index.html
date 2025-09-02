@@ -10,7 +10,7 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://montagem.brasmol.com.br/" />
 
-    <!-- Google Search Console -->
+    <!-- Google Search Console (confira se o token está idêntico ao do Search Console) -->
     <meta name="google-site-verification" content="F4oqIjQb_QoDqAnHqbng7Jm3Bi_Vk2nByHPrCTvPjBU" />
 
     <!-- Open Graph -->
@@ -31,7 +31,7 @@
     <!-- hreflang -->
     <link rel="alternate" href="https://montagem.brasmol.com.br/" hreflang="pt-BR" />
 
-    <!-- Ícones -->
+    <!-- Ícones / PWA -->
     <link rel="icon" type="image/png" href="/logol.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0e4a7b" />
@@ -68,14 +68,22 @@
       })();
     </script>
 
-    <!-- Google tag (gtag.js) — substitua pelos seus IDs -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXX"></script>
+    <!-- Google tag (gtag.js) — carregue UMA vez -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9PBDERESP5"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){ dataLayer.push(arguments); }
       gtag('js', new Date());
-      gtag('config', 'AW-XXXXXXXXX');   /* Google Ads */
-      // gtag('config', 'G-YYYYYYYYYY'); /* GA4 opcional */
+
+      /* GA4 */
+      gtag('config', 'G-9PBDERESP5', {
+        anonymize_ip: true,
+        cookie_flags: 'SameSite=None;Secure'
+      });
+
+      /* Google Ads (opcional) — substitua pelo seu ID e descomente
+      gtag('config', 'AW-XXXXXXXXX');
+      */
     </script>
 
     <!-- Performance de CDN -->
@@ -96,28 +104,35 @@
     <!-- App -->
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Rastreamento de conversões (cliques em contato, tel, mail, mapas) -->
+    <!-- Eventos: GA4 (generate_lead / contact_view / click_map) e, se ativar, Google Ads -->
     <script>
       document.addEventListener('click', function(e){
         var a = e.target && e.target.closest ? e.target.closest('a') : null;
         if (!a) return;
-
         var href = a.getAttribute('href') || '';
 
-        // clique na âncora de contato
+        // contato (anchor)
         if (href === '#contato') {
-          gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/CONV_ID_CONTACT' });
+          gtag('event', 'contact_view', { method: 'anchor' });
+          // Ads opcional: gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/CONV_ID_CONTACT' });
         }
-        // cliques em telefone e email
+
+        // telefone
         if (href.startsWith('tel:')) {
-          gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/CONV_ID_CALL' });
+          gtag('event', 'generate_lead', { method: 'phone' });
+          // Ads opcional: gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/CONV_ID_CALL' });
         }
+
+        // e-mail
         if (href.startsWith('mailto:')) {
-          gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/CONV_ID_EMAIL' });
+          gtag('event', 'generate_lead', { method: 'email' });
+          // Ads opcional: gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/CONV_ID_EMAIL' });
         }
-        // abrir rotas (Maps/Waze)
-        if (href.includes('google.com/maps') || href.includes('waze.com/ul')) {
-          gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/CONV_ID_MAP' });
+
+        // mapas
+        if (href.includes('google.com/maps') || href.includes('waze.com')) {
+          gtag('event', 'click_map', { provider: href.includes('waze.com') ? 'waze' : 'google_maps' });
+          // Ads opcional: gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXXX/CONV_ID_MAP' });
         }
       });
     </script>
