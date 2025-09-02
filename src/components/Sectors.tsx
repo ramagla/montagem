@@ -99,7 +99,10 @@ export default function Sectors() {
         {/* Cabeçalho */}
         <Head>
           <h2 id="setores-title">Setores atendidos</h2>
-          <p>Soluções de montagem sob medida para diferentes segmentos da indústria.</p>
+<p>
+  Atuamos em setores automotivo, linha branca, máquinas e equipamentos e outros ramos industriais,
+  oferecendo <strong>soluções de montagem sob medida</strong> com conformidade e rastreabilidade.
+</p>
         </Head>
 
         {/* Grid de setores */}

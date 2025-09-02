@@ -158,7 +158,10 @@ export default function Process() {
       <div className="container">
         <Head>
           <h2 id="processo-title">Como trabalhamos</h2>
-          <p>Um processo estruturado para garantir qualidade, rastreabilidade e prazo.</p>
+<p>
+  Nosso processo de <strong>montagem terceirizada</strong> segue etapas padronizadas — do briefing técnico à expedição —
+  assegurando qualidade, rastreabilidade total e cumprimento rigoroso de prazos.
+</p>
         </Head>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: howToJsonLd }} />

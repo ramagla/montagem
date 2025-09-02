@@ -324,7 +324,9 @@ export default function ContactCTA() {
             <IconWrap><IconBuilding /></IconWrap>
             Contato oficial
           </Eyebrow>
-          <Title id="contato-title">Fale com a Bras-Mol</Title>
+<Title id="contato-title">
+  Contato oficial da Bras-Mol para serviços de montagem
+</Title>
           <Subtitle>Entre em contato por telefone ou e-mail, ou trace sua rota pelo mapa.</Subtitle>
         </Header>
 

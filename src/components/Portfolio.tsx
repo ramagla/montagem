@@ -101,7 +101,10 @@ export default function Portfolio() {
         {/* Cabeçalho */}
         <Head>
           <h2 id="portfolio-title">Portfólio (exemplos)</h2>
-          <p>Alguns tipos de subconjuntos que já desenvolvemos para clientes em diferentes segmentos.</p>
+<p>
+  Exemplos de <strong>subconjuntos metálicos, plásticos e kits mecânicos</strong>
+  já desenvolvidos para clientes de diferentes setores industriais.
+</p>
         </Head>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listJsonLd }} />

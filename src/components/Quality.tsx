@@ -98,7 +98,10 @@ export default function Quality() {
       <div className="container">
         <Head>
           <h2 id="qualidade-title">Qualidade &amp; Certificações</h2>
-          <p>Confiabilidade assegurada por certificações e processos robustos.</p>
+<p>
+  Confiabilidade assegurada pela <strong>certificação ISO 9001</strong>, rastreabilidade de lotes
+  e documentação de controle de qualidade em todas as etapas de montagem.
+</p>
         </Head>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listJsonLd }} />

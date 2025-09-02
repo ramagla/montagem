@@ -75,10 +75,11 @@ export default function Footer() {
             <a href="#contato">Contato</a>
           </Nav>
 
-          <BtnTop href="#hero" aria-label="Voltar ao topo">
-            <i className="bi bi-arrow-up-short" aria-hidden="true"></i>
-            Topo
-          </BtnTop>
+          <BtnTop href="#hero" aria-label="Voltar ao início da página">
+  <i className="bi bi-arrow-up-short" aria-hidden="true"></i>
+  Início
+</BtnTop>
+
         </TopRow>
 
         <BottomRow>

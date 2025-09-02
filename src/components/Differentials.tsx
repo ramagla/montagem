@@ -109,7 +109,10 @@ export default function Differentials() {
         {/* Cabeçalho */}
         <Head>
           <h2 id="diferenciais-title">Diferenciais da Bras-Mol</h2>
-          <p>O que nos torna a escolha ideal para terceirização de montagem.</p>
+<p>
+  Nossos diferenciais garantem excelência na <strong>montagem terceirizada de subconjuntos</strong>,
+  unindo qualidade, prazo e flexibilidade para indústrias automotivas, linha branca e diversos segmentos.
+</p>
         </Head>
 
         {/* Grid */}

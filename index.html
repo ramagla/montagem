@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0e4a7b" />
 
-    <title>Bras-Mol Molas e Estampados</title>
-    <meta name="description" content="Montagem terceirizada de subconjuntos metálicos e plásticos, molas e estampados. Processos padronizados, inspeção de qualidade e rastreabilidade." />
+    <title>Bras-Mol Molas e Estampados | Montagem terceirizada de subconjuntos</title>
+    <meta name="description" content="Especialistas em montagem terceirizada de subconjuntos metálicos e plásticos. Molas, estampados e kits mecânicos com rastreabilidade, qualidade e prazo garantido." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://montagem.brasmol.com.br/" />
 
-    <!-- Google Tag Manager (GTM: centraliza GA4/Ads/pixels) -->
+    <!-- Google Tag Manager -->
     <script>
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -47,10 +47,6 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0e4a7b" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    <!-- (Opcional) Preload da LCP: só ative se o Hero usar um arquivo local. 
-    <link rel="preload" as="image" href="/hero.jpg" imagesrcset="/hero.jpg 1x" fetchpriority="high" />
-    -->
-
     <!-- JSON-LD WebSite/SearchAction -->
     <script type="application/ld+json">
     {
@@ -79,49 +75,43 @@
       })();
     </script>
 
-    <!-- Performance: conexões antecipadas -->
+    <!-- Performance -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
 
     <!-- CSS de terceiros -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Jp7f0o6r0cYcFJmJ2J0gZkz0y6t2z3a7n3VnG6E5pZQwqJ0qjCk9r7Jz+J2cI1pA"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
   </head>
+
   <body>
-    <!-- Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) - precisa ficar logo após abrir o body -->
     <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQLC43FM"
               height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Acessibilidade -->
+    <!-- H1 oculto só para SEO -->
+    <h1 class="visually-hidden">
+      Bras-Mol Molas e Estampados — Montagem terceirizada de subconjuntos metálicos e plásticos
+    </h1>
+
+    <!-- Link de acessibilidade (visível só via teclado) -->
     <a class="visually-hidden-focusable" href="#hero">Pular para o conteúdo</a>
 
     <!-- App -->
     <div id="root"></div>
 
     <!-- JS de terceiros -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-mPr0Qn6nqXxw2nKYi6l3Dg2hO2Q0Ww9v0mH7k3f9gqvV5qXlQJcG3E+8m0l8l+q9"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <!-- App (Vite/React) -->
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Eventos como dataLayer (para o GTM capturar e encaminhar para GA4/Ads) -->
+    <!-- Eventos: dataLayer para o GTM encaminhar ao GA4/Ads -->
     <script>
       window.dataLayer = window.dataLayer || [];
       document.addEventListener('click', function(e){
@@ -129,22 +119,15 @@
         if (!a) return;
         var href = a.getAttribute('href') || '';
 
-        // contato (anchor)
         if (href === '#contato') {
           window.dataLayer.push({ event: 'contact_view', method: 'anchor' });
         }
-
-        // telefone
         if (href.startsWith('tel:')) {
           window.dataLayer.push({ event: 'generate_lead', method: 'phone' });
         }
-
-        // e-mail
         if (href.startsWith('mailto:')) {
           window.dataLayer.push({ event: 'generate_lead', method: 'email' });
         }
-
-        // mapas
         if (href.includes('google.com/maps') || href.includes('waze.com')) {
           window.dataLayer.push({
             event: 'click_map',

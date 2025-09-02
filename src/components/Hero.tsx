@@ -2,11 +2,7 @@
 import styled from "styled-components";
 
 const Wrap = styled.section`
-  background: linear-gradient(
-    180deg,
-    #fff,
-    ${({ theme }) => (theme as any).colors.bg}
-  );
+  background: linear-gradient(180deg, #fff, ${({ theme }) => (theme as any).colors.bg});
   border-bottom: 1px solid ${({ theme }) => (theme as any).colors.border};
   padding: 128px 0 60px;
   scroll-margin-top: 80px;
@@ -37,13 +33,13 @@ const CTAButton = styled.a`
   font-weight: 600;
   padding: 12px 24px;
   border-radius: 12px;
-  background: var(--brand, #d00);
+  background: ${({ theme }) => (theme as any).colors.brand};
   color: #fff;
   text-decoration: none;
   transition: all 0.2s;
 
   &:hover {
-    background: #a00;
+    background: ${({ theme }) => (theme as any).colors.brandDark || "#083358"};
     transform: translateY(-2px);
   }
 `;
@@ -53,23 +49,23 @@ export default function Hero() {
     <Wrap id="hero">
       <div className="container">
         <div className="row align-items-center g-5">
-          {/* Texto */}
-          <div className="col-md-6">
+          {/* Texto (fica à esquerda em md+) */}
+          <div className="col-md-6 order-md-1">
             <Title>
-              Montagem terceirizada de componentes com qualidade e prazo.
+              Montagem terceirizada de subconjuntos metálicos e plásticos com qualidade e prazo.
             </Title>
             <Subtitle>
-              Bras-Mol garante velocidade, rastreabilidade e conformidade
-              para seu subconjunto chegar pronto à linha de produção.
+              A <strong>Bras-Mol</strong> é especialista em montagem de molas, chapas estampadas, kits mecânicos e componentes plásticos. Trabalhamos com processos padronizados, inspeção de qualidade e rastreabilidade total, garantindo que seu subconjunto chegue pronto à linha de produção.
             </Subtitle>
+
             <CTAButton href="#contato" aria-label="Ir para a seção de contato">
               <i className="bi bi-envelope-fill" aria-hidden="true"></i>
               Contato
             </CTAButton>
           </div>
 
-          {/* Imagem */}
-          <div className="col-md-6 text-center">
+          {/* Imagem (à direita em md+) */}
+          <div className="col-md-6 text-center order-md-2">
             <img
               src="https://images.unsplash.com/photo-1581093588401-16ec4f6c1b2a?q=80&w=1200"
               className="img-fluid rounded shadow"

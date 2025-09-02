@@ -91,11 +91,12 @@ export default function Services() {
           <div className="col-md-8">
             <Head>
               <span className="visually-hidden" id="servicos-title">Serviços</span>
-              <h2>Serviços de montagem</h2>
-              <p>
-                Montagem terceirizada de <strong>conjuntos metálicos e plásticos</strong> com
-                padronização, rastreabilidade e registros de qualidade.
-              </p>
+              <h2>Serviços de montagem industrial terceirizada</h2>
+<p>
+  Especialistas em <strong>montagem de subconjuntos metálicos, plásticos e kits mecânicos</strong>,
+  com padronização de processos, rastreabilidade completa e registros de qualidade auditáveis.
+</p>
+
             </Head>
           </div>
           <div className="col-md-4">
