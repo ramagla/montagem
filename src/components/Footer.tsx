@@ -29,7 +29,9 @@ const BottomRow = styled.div`
 `;
 
 const Nav = styled.nav`
-  display: flex; gap: 10px; flex-wrap: wrap;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 
   a {
     text-decoration: none;
@@ -37,22 +39,25 @@ const Nav = styled.nav`
     border-radius: 10px;
     border: 1px solid transparent;
     color: inherit;
+    font-weight: 600;
   }
   a:hover {
     border-color: ${({ theme }) => (theme as any).colors.border};
-    background: rgba(0,0,0,.02);
+    background: rgba(0, 0, 0, 0.02);
   }
 `;
 
 const BtnTop = styled.a`
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   padding: 6px 10px;
   border-radius: 10px;
   border: 1px solid ${({ theme }) => (theme as any).colors.border};
   text-decoration: none;
 
   &:hover {
-    background: rgba(0,0,0,.03);
+    background: rgba(0, 0, 0, 0.03);
   }
 `;
 
@@ -64,7 +69,7 @@ export default function Footer() {
   return (
     <Wrap aria-label="Rodapé do site">
       <div className="container">
-
+        {/* Navegação rápida */}
         <TopRow>
           <Nav aria-label="Links rápidos do rodapé">
             <a href="#servicos">Serviços</a>
@@ -72,23 +77,29 @@ export default function Footer() {
             <a href="#diferenciais">Diferenciais</a>
             <a href="#processo">Processo</a>
             <a href="#qualidade">Qualidade</a>
+            <a href="#portfolio">Portfólio</a>
             <a href="#contato">Contato</a>
           </Nav>
 
           <BtnTop href="#hero" aria-label="Voltar ao início da página">
-  <i className="bi bi-arrow-up-short" aria-hidden="true"></i>
-  Início
-</BtnTop>
-
+            <i className="bi bi-arrow-up-short" aria-hidden="true"></i>
+            Início
+          </BtnTop>
         </TopRow>
 
+        {/* Direitos autorais e endereço */}
         <BottomRow>
-<div>
-  © {new Date().getFullYear()} Bras-Mol Molas &amp; Estampados • 
-  <a href="https://www.brasmol.com.br" target="_blank" rel="noopener noreferrer">
-    www.brasmol.com.br
-  </a>
-</div>
+          <div>
+            © {new Date().getFullYear()}{" "}
+            <strong>Bra<span style={{ textTransform: "lowercase" }}>s</span>-Mol Molas e Estampados Ltda</strong> •{" "}
+            <a
+              href="https://www.brasmol.com.br"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              www.brasmol.com.br
+            </a>
+          </div>
 
           <address
             style={{ margin: 0 }}
@@ -96,13 +107,13 @@ export default function Footer() {
             itemType="https://schema.org/PostalAddress"
           >
             <Muted>
+              <span itemProp="streetAddress">Estrada Bonsucesso, 1953</span> •{" "}
               <span itemProp="addressLocality">Itaquaquecetuba</span> •{" "}
               <span itemProp="addressRegion">SP</span> •{" "}
               <span itemProp="addressCountry">BR</span>
             </Muted>
           </address>
         </BottomRow>
-
       </div>
     </Wrap>
   );

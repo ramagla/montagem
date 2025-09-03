@@ -136,5 +136,39 @@
         }
       });
     </script>
+    <nav class="visually-hidden">
+  <a href="/servicos">Serviços</a>
+  <a href="/setores">Setores</a>
+  <a href="/diferenciais">Diferenciais</a>
+  <a href="/processo">Processo</a>
+  <a href="/qualidade">Qualidade</a>
+  <a href="/portfolio">Portfólio</a>
+  <a href="/contato">Contato</a>
+</nav>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var path = a.pathname || '';
+
+    // contato (anchor OU rota amigável)
+    if (href === '#contato' || path.endsWith('/contato')) {
+      window.dataLayer.push({ event: 'contact_view', method: 'nav' });
+    }
+
+    if (href.startsWith('tel:'))   window.dataLayer.push({ event: 'generate_lead', method: 'phone' });
+    if (href.startsWith('mailto:'))window.dataLayer.push({ event: 'generate_lead', method: 'email' });
+
+    if (href.includes('google.com/maps') || href.includes('waze.com')) {
+      window.dataLayer.push({
+        event: 'click_map',
+        provider: href.includes('waze.com') ? 'waze' : 'google_maps'
+      });
+    }
+  });
+</script>
+
   </body>
 </html>

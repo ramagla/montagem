@@ -7,46 +7,46 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Seções principais -->
+  <!-- Seções principais (URLs amigáveis, sem anchors) -->
   <url>
-    <loc>https://montagem.brasmol.com.br/#servicos</loc>
+    <loc>https://montagem.brasmol.com.br/servicos</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://montagem.brasmol.com.br/#setores</loc>
+    <loc>https://montagem.brasmol.com.br/setores</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://montagem.brasmol.com.br/#diferenciais</loc>
+    <loc>https://montagem.brasmol.com.br/diferenciais</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://montagem.brasmol.com.br/#processo</loc>
+    <loc>https://montagem.brasmol.com.br/processo</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://montagem.brasmol.com.br/#qualidade</loc>
+    <loc>https://montagem.brasmol.com.br/qualidade</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://montagem.brasmol.com.br/#portfolio</loc>
+    <loc>https://montagem.brasmol.com.br/portfolio</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://montagem.brasmol.com.br/#contato</loc>
+    <loc>https://montagem.brasmol.com.br/contato</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Intenção de busca extra -->
+  <!-- Página de intenção de busca (extra) -->
   <url>
-    <loc>https://montagem.brasmol.com.br/?q=fabrica-de-molas</loc>
+    <loc>https://montagem.brasmol.com.br/fabrica-de-molas</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
