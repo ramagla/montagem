@@ -93,9 +93,10 @@ export default function Services() {
               <span className="visually-hidden" id="servicos-title">Serviços</span>
               <h2>Serviços de montagem industrial terceirizada</h2>
 <p>
-  Especialistas em <strong>montagem de subconjuntos metálicos, plásticos e kits mecânicos</strong>,
-  com padronização de processos, rastreabilidade completa e registros de qualidade auditáveis.
+  Especialistas em <strong>montagem terceirizada de subconjuntos metálicos e plásticos</strong> e
+  kits mecânicos, com padronização de processos, rastreabilidade completa e registros de qualidade auditáveis.
 </p>
+
 
             </Head>
           </div>

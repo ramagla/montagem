@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0e4a7b" />
 
-    <title>Bras-Mol Molas e Estampados | Montagem terceirizada de subconjuntos</title>
-    <meta name="description" content="Especialistas em montagem terceirizada de subconjuntos metálicos e plásticos. Molas, estampados e kits mecânicos com rastreabilidade, qualidade e prazo garantido." />
+    <title>Bras-Mol | Montagem de Subconjuntos Industriais</title>
+    <meta name="description" content="Montagem terceirizada de subconjuntos metálicos, plásticos e kits mecânicos com qualidade, rastreabilidade e prazo garantido." />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://montagem.brasmol.com.br/" />
 
@@ -27,14 +27,14 @@
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://montagem.brasmol.com.br/" />
-    <meta property="og:title" content="Bras-Mol Molas e Estampados — Montagem terceirizada" />
+    <meta property="og:title" content="Bras-Mol | Montagem de Subconjuntos Industriais" />
     <meta property="og:description" content="Subconjuntos metálicos e plásticos com qualidade, rastreabilidade e prazo." />
     <meta property="og:image" content="https://montagem.brasmol.com.br/og-image.jpg" />
     <meta property="og:image:alt" content="Linha de montagem industrial da Bras-Mol" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Bras-Mol Molas e Estampados — Montagem terceirizada" />
+    <meta name="twitter:title" content="Bras-Mol | Montagem de Subconjuntos Industriais" />
     <meta name="twitter:description" content="Subconjuntos metálicos e plásticos com qualidade, rastreabilidade e prazo." />
     <meta name="twitter:image" content="https://montagem.brasmol.com.br/og-image.jpg" />
 
@@ -87,7 +87,7 @@
   </head>
 
   <body>
-    <!-- Google Tag Manager (noscript) - precisa ficar logo após abrir o body -->
+    <!-- Google Tag Manager (noscript) -->
     <noscript>
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KQLC43FM"
               height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -102,8 +102,45 @@
     <!-- Link de acessibilidade (visível só via teclado) -->
     <a class="visually-hidden-focusable" href="#hero">Pular para o conteúdo</a>
 
+    <!-- Fallback de conteúdo estático para crawlers que não rodam JS -->
+<section id="intro-seo" class="visually-hidden">
+  <div class="container">
+    <h2 class="h5 fw-bold mb-2">Montagem terceirizada de subconjuntos industriais</h2>
+    <p class="mb-2">
+      A Bras-Mol executa <strong>montagem terceirizada de subconjuntos metálicos e plásticos</strong>,
+      além de kits mecânicos, com processos padronizados, <strong>rastreabilidade</strong> e
+      <strong> testes funcionais/dimensionais</strong>. Entregamos subconjuntos prontos para a sua linha,
+      com <strong>qualidade</strong> e <strong>prazo</strong>.
+    </p>
+    <p class="mb-0">
+      Atendemos <strong>Automotivo/Aftermarket</strong>, <strong>Linha Branca</strong>,
+      <strong>Linha Marron</strong>, <strong>Agrícola</strong> e <strong>Máquinas e Equipamentos</strong>.
+      Seguimos boas práticas <strong>IATF 16949</strong> e diretrizes <strong>ISO 14001</strong>.
+    </p>
+  </div>
+</section>
+
+
     <!-- App -->
-    <div id="root"></div>
+<!-- Fallback de conteúdo estático para crawlers que não rodam JS -->
+<section id="intro-seo" class="visually-hidden">
+  <div class="container">
+    <h2 class="h5 fw-bold mb-2">Montagem terceirizada de subconjuntos industriais</h2>
+    <p class="mb-2">
+      A Bras-Mol executa <strong>montagem terceirizada de subconjuntos metálicos e plásticos</strong>,
+      além de kits mecânicos, com processos padronizados, <strong>rastreabilidade</strong> e
+      <strong>testes funcionais/dimensionais</strong>.
+    </p>
+    <p class="mb-0">
+      Entregamos subconjuntos prontos para a sua linha com <strong>qualidade</strong> e <strong>prazo</strong>;
+      atendemos <strong>Automotivo/Aftermarket</strong>, <strong>Linha Branca</strong>, <strong>Linha Marron</strong>,
+      <strong>Agrícola</strong> e <strong>Máquinas e Equipamentos</strong>.
+    </p>
+  </div>
+</section>
+
+<!-- App -->
+<div id="root"></div>
 
     <!-- JS de terceiros -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -111,23 +148,24 @@
     <!-- App (Vite/React) -->
     <script type="module" src="/src/main.tsx"></script>
 
-    <!-- Eventos: dataLayer para o GTM encaminhar ao GA4/Ads -->
+    <!-- dataLayer: consolidado em um único listener -->
     <script>
       window.dataLayer = window.dataLayer || [];
       document.addEventListener('click', function(e){
         var a = e.target && e.target.closest ? e.target.closest('a') : null;
         if (!a) return;
-        var href = a.getAttribute('href') || '';
 
-        if (href === '#contato') {
-          window.dataLayer.push({ event: 'contact_view', method: 'anchor' });
+        var href = a.getAttribute('href') || '';
+        var path = a.pathname || '';
+
+        // contato (anchor OU rota amigável)
+        if (href === '#contato' || path.endsWith('/contato')) {
+          window.dataLayer.push({ event: 'contact_view', method: href === '#contato' ? 'anchor' : 'nav' });
         }
-        if (href.startsWith('tel:')) {
-          window.dataLayer.push({ event: 'generate_lead', method: 'phone' });
-        }
-        if (href.startsWith('mailto:')) {
-          window.dataLayer.push({ event: 'generate_lead', method: 'email' });
-        }
+
+        if (href.startsWith('tel:'))    window.dataLayer.push({ event: 'generate_lead', method: 'phone' });
+        if (href.startsWith('mailto:')) window.dataLayer.push({ event: 'generate_lead', method: 'email' });
+
         if (href.includes('google.com/maps') || href.includes('waze.com')) {
           window.dataLayer.push({
             event: 'click_map',
@@ -136,39 +174,16 @@
         }
       });
     </script>
-    <nav class="visually-hidden">
-  <a href="/servicos">Serviços</a>
-  <a href="/setores">Setores</a>
-  <a href="/diferenciais">Diferenciais</a>
-  <a href="/processo">Processo</a>
-  <a href="/qualidade">Qualidade</a>
-  <a href="/portfolio">Portfólio</a>
-  <a href="/contato">Contato</a>
-</nav>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  document.addEventListener('click', function(e){
-    var a = e.target && e.target.closest ? e.target.closest('a') : null;
-    if (!a) return;
-    var href = a.getAttribute('href') || '';
-    var path = a.pathname || '';
 
-    // contato (anchor OU rota amigável)
-    if (href === '#contato' || path.endsWith('/contato')) {
-      window.dataLayer.push({ event: 'contact_view', method: 'nav' });
-    }
-
-    if (href.startsWith('tel:'))   window.dataLayer.push({ event: 'generate_lead', method: 'phone' });
-    if (href.startsWith('mailto:'))window.dataLayer.push({ event: 'generate_lead', method: 'email' });
-
-    if (href.includes('google.com/maps') || href.includes('waze.com')) {
-      window.dataLayer.push({
-        event: 'click_map',
-        provider: href.includes('waze.com') ? 'waze' : 'google_maps'
-      });
-    }
-  });
-</script>
-
+    <!-- Navegação auxiliar invisível (SEO/acessibilidade) -->
+    <nav class="visually-hidden" aria-label="Mapa de navegação">
+      <a href="/servicos">Serviços</a>
+      <a href="/setores">Setores</a>
+      <a href="/diferenciais">Diferenciais</a>
+      <a href="/processo">Processo</a>
+      <a href="/qualidade">Qualidade</a>
+      <a href="/portfolio">Portfólio</a>
+      <a href="/contato">Contato</a>
+    </nav>
   </body>
 </html>
