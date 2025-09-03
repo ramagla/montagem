@@ -36,7 +36,11 @@ const BurgerBtn = styled.button`
 
 const NavWrap = styled.nav<{open:boolean}>`
   @media (max-width: 980px){
-    position: absolute; top: 88px; left: 0; right: 0; /* acompanha altura do header */
+    position: absolute;
+    top: 88px;
+    left: 0;
+    right: 0;
+    width: 100%; /* garante largura total no mobile */
     background: ${({theme}) => (theme as any).colors.card};
     border-bottom: 1px solid ${({theme}) => (theme as any).colors.border};
     transform-origin: top center;
@@ -46,31 +50,49 @@ const NavWrap = styled.nav<{open:boolean}>`
   }
 `;
 
-const NavList = styled.ul`
-  display: flex; gap: 8px; align-items: center; list-style: none; margin: 0; padding: 0;
 
-  @media (max-width: 980px){
-    flex-direction: column; align-items: stretch;
-    padding: 8px 12px; gap: 6px;
+const NavList = styled.ul`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 980px) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%; /* garante largura total */
+    padding: 8px 12px;
+    gap: 6px;
   }
 
-  a.nav-link{
-    font-weight: 600; opacity: .95;
+  a.nav-link {
+    font-weight: 600;
+    opacity: 0.95;
     border-radius: 12px;
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 12px; text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    text-decoration: none;
 
-    @media (max-width: 980px){
-      padding: 12px; border: 1px solid ${({theme}) => (theme as any).colors.border};
-      border-radius: 14px; background: ${({theme}) => (theme as any).colors.card};
+    @media (max-width: 980px) {
+      width: 100%; /* link ocupa 100% */
+      justify-content: flex-start; /* texto alinhado à esquerda */
+      padding: 14px;
+      border: 1px solid ${({ theme }) => (theme as any).colors.border};
+      border-radius: 14px;
+      background: ${({ theme }) => (theme as any).colors.card};
     }
   }
 
-  a.nav-link.active{
-    background: #0e4a7b; /* azul escuro */
+  a.nav-link.active {
+    background: #0e4a7b;
     color: #fff;
   }
 `;
+
 
 const IDS_SECOES = [
   "servicos",

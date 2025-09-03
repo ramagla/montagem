@@ -91,47 +91,67 @@ const Badge = styled.span`
   border: 1px solid ${({ theme }) => (theme as any).colors?.border || "#e5e7eb"};
   background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(245,246,248,.9));
   box-shadow: inset 0 -2px 6px rgba(0,0,0,.04);
+
+  @media (max-width: 480px) { width: 34px; height: 34px; }
 `;
 
 const CardTitle = styled.h3`
   margin: 0;
   font-size: 18px;
   letter-spacing: -.01em;
+
+  @media (max-width: 480px) { font-size: 16px; }
 `;
 
+/* Lista rótulo/valor com foco no mobile */
 const List = styled.dl`
   display: grid;
-  grid-template-columns: 180px 1fr;   /* um pouco mais largo pro rótulo */
-  row-gap: 12px;                      /* mais respiro vertical */
+  grid-template-columns: 180px 1fr;
+  row-gap: 12px;
   column-gap: 16px;
   margin: 0;
 
-  /* rótulos com ícone + texto alinhados */
   dt{
     display: inline-flex;
     align-items: center;
-    gap: 8px;                         /* espaço entre ícone e texto */
+    gap: 8px;
     font-weight: 700;
     opacity: .9;
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
-  /* valores igualmente alinhados */
   dd{
     margin: 0;
     opacity: .96;
     display: inline-flex;
     align-items: center;
-    gap: 10px;                        /* espaço entre elementos no valor */
-    line-height: 1.2;
+    gap: 10px;
+    line-height: 1.35;
+
+    /* Quebra segura de strings longas no mobile */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  dd a{
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(0,0,0,.12);
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   @media (max-width: 700px) {
     grid-template-columns: 1fr;
     dt{ margin-top: 8px; }
   }
-`;
 
+  @media (max-width: 480px) {
+    row-gap: 10px;
+    dt { font-size: 13px; }
+    dd { font-size: 14px; }
+  }
+`;
 
 /* Botões e Ações */
 const Actions = styled.div`
@@ -150,14 +170,19 @@ const ActionBtn = styled.a`
   border: 1px solid ${({ theme }) => (theme as any).colors?.border || "#e5e7eb"};
   padding: 11px 14px;
   border-radius: 12px;
-  background: #fff;
+  background: #fff;   /* botão branco */
   text-decoration: none;
   transition: transform .06s ease, box-shadow .2s ease;
 
   &:hover { transform: translateY(-1px); box-shadow: 0 8px 16px rgba(0,0,0,.06); }
   &:active { transform: translateY(0); }
 
-  /* Ripple suave (respeita prefers-reduced-motion) */
+  @media (max-width: 480px) {
+    padding: 9px 12px;
+    font-size: 13px;
+  }
+
+  /* Ripple suave */
   @media (prefers-reduced-motion: no-preference) {
     &::after{
       content: "";
@@ -172,17 +197,12 @@ const ActionBtn = styled.a`
   }
 `;
 
-const PrimaryBtn = styled(ActionBtn)`
-  background: #fff;
-  color: ${({ theme }) => (theme as any).colors?.brand || "#2563eb"};
-  border-color: ${({ theme }) => (theme as any).colors?.brand || "#2563eb"};
-  /* contraste melhor ao passar o mouse */
-  &:hover { box-shadow: 0 8px 16px rgba(0,0,0,.06); transform: translateY(-1px); }
-`;
-
-
 const IconWrap = styled.span`
-  display: inline-flex; width: 18px; height: 18px; align-items: center; justify-content: center;
+  display: inline-flex;
+  width: 18px; height: 18px;
+  align-items: center; justify-content: center;
+
+  @media (max-width: 480px) { width: 16px; height: 16px; }
 `;
 
 /* Mapa & Skeleton */
@@ -209,13 +229,14 @@ const MapBox = styled.div`
   }
 `;
 
-/* Utilitário de acessibilidade */
+/* Acessibilidade */
 const SrOnly = styled.span`
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
 `;
 
 /* ===================== */
-/* Ícones SVG (inline)   */
+/* Ícones SVG             */
 /* ===================== */
 function IconBuilding() {
   return (
@@ -252,20 +273,6 @@ function IconCopy() {
     </svg>
   );
 }
-function IconGMaps() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M12 2c4.4 0 8 3.6 8 8 0 5.5-8 12-8 12S4 15.5 4 10c0-4.4 3.6-8 8-8Zm0 10.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-    </svg>
-  );
-}
-function IconWaze() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-      <path fill="currentColor" d="M20 12a7 7 0 0 0-13.76-2H6a5 5 0 0 0 2.8 4.52A3 3 0 0 1 8 16a3 3 0 0 0 6 0 3 3 0 0 1 3-3h1a2 2 0 0 0 2-2Z"/>
-    </svg>
-  );
-}
 
 /* ===================== */
 /* Constantes            */
@@ -291,7 +298,7 @@ export default function ContactCTA() {
   const mapId = useId();
   const [mapLoaded, setMapLoaded] = useState(false);
 
-  // JSON-LD p/ SEO local (Organization + ContactPoint)
+  // JSON-LD p/ SEO local
   const orgSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -315,7 +322,6 @@ export default function ContactCTA() {
     }]
   }), []);
 
-  // Ripple (com tipagem enxuta)
   const onRipple = (e: MouseEvent<HTMLAnchorElement>) => {
     const rect = (e.currentTarget as HTMLAnchorElement).getBoundingClientRect();
     (e.currentTarget as HTMLAnchorElement).style.setProperty("--x", `${e.clientX - rect.left}px`);
@@ -345,11 +351,8 @@ export default function ContactCTA() {
             <IconWrap><IconBuilding /></IconWrap>
             Contato oficial
           </Eyebrow>
-<Title id="contato-title">
-  Contato oficial da Bras-Mol
-</Title>
-<Subtitle>Fale por telefone ou e-mail e trace sua rota pelo mapa.</Subtitle>
-
+          <Title id="contato-title">Contato oficial da Bras-Mol</Title>
+          <Subtitle>Fale por telefone ou e-mail e trace sua rota pelo mapa.</Subtitle>
         </Header>
 
         <Grid>
@@ -361,83 +364,54 @@ export default function ContactCTA() {
             </CardHeader>
 
             <List>
-              <dt>
-  <IconWrap aria-hidden="true"><IconBuilding /></IconWrap>
-  CNPJ
-</dt>
-<dd>
-  <span itemProp="taxID">{CNPJ}</span>
-  <button
-    type="button"
-    onClick={() => copyToClipboard(CNPJ)}
-    aria-label={`Copiar CNPJ ${CNPJ}`}
-    style={{
-      border: "1px solid rgba(0,0,0,.08)",
-      background: "transparent",
-      borderRadius: 8,
-      padding: "4px 6px",
-      cursor: "pointer",
-      display: "inline-flex",
-      alignItems: "center",
-      gap: 6
-    }}
-  >
-    <IconCopy /> <span style={{fontSize:12,fontWeight:700}}>Copiar</span>
-  </button>
-</dd>
+              <dt><IconWrap aria-hidden="true"><IconBuilding /></IconWrap> CNPJ</dt>
+              <dd>
+                <span itemProp="taxID">{CNPJ}</span>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(CNPJ)}
+                  aria-label={`Copiar CNPJ ${CNPJ}`}
+                  style={{
+                    border: "1px solid rgba(0,0,0,.08)",
+                    background: "transparent",
+                    borderRadius: 8,
+                    padding: "4px 6px",
+                    cursor: "pointer",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6
+                  }}
+                >
+                  <IconCopy /> <span style={{fontSize:12,fontWeight:700}}>Copiar</span>
+                </button>
+              </dd>
 
-<dt>
-  <IconWrap aria-hidden="true"><IconMapPin /></IconWrap>
-  Endereço
-</dt>
-<dd>
-  <span itemProp="address">{ENDERECO_TXT}</span>
-</dd>
+              <dt><IconWrap aria-hidden="true"><IconMapPin /></IconWrap> Endereço</dt>
+              <dd><span itemProp="address">{ENDERECO_TXT}</span></dd>
 
-<dt>
-  <IconWrap aria-hidden="true"><IconBuilding /></IconWrap>
-  Cidade/UF
-</dt>
-<dd>Itaquaquecetuba / SP</dd>
+              <dt><IconWrap aria-hidden="true"><IconBuilding /></IconWrap> Cidade/UF</dt>
+              <dd>Itaquaquecetuba / SP</dd>
 
-<dt>
-  <IconWrap aria-hidden="true"><IconPhone /></IconWrap>
-  Telefone
-</dt>
-<dd>
-  <a href={telHref} itemProp="telephone" aria-label={`Ligar para ${FONE}`}>{FONE}</a>
-</dd>
+              <dt><IconWrap aria-hidden="true"><IconPhone /></IconWrap> Telefone</dt>
+              <dd><a href={telHref} itemProp="telephone" aria-label={`Ligar para ${FONE}`}>{FONE}</a></dd>
 
-<dt>
-  <IconWrap aria-hidden="true"><IconMail /></IconWrap>
-  E-mail SAC
-</dt>
-<dd>
-  <a href={`mailto:${EMAIL_SAC}`} itemProp="email">{EMAIL_SAC}</a>
-</dd>
+              <dt><IconWrap aria-hidden="true"><IconMail /></IconWrap> E-mail SAC</dt>
+              <dd><a href={`mailto:${EMAIL_SAC}`} itemProp="email">{EMAIL_SAC}</a></dd>
 
-<dt>
-  <IconWrap aria-hidden="true"><IconMail /></IconWrap>
-  E-mail Vendas
-</dt>
-<dd>
-  <a href={`mailto:${EMAIL_VENDAS}`} itemProp="email">{EMAIL_VENDAS}</a>
-</dd>
+              <dt><IconWrap aria-hidden="true"><IconMail /></IconWrap> E-mail Vendas</dt>
+              <dd><a href={`mailto:${EMAIL_VENDAS}`} itemProp="email">{EMAIL_VENDAS}</a></dd>
 
-{/* NOVO: Site institucional */}
-<dt>
-  <IconWrap aria-hidden="true"><IconBuilding /></IconWrap>
-  Site
-</dt>
-<dd>
-  <a href="https://www.brasmol.com.br" target="_blank" rel="noopener noreferrer">
-    www.brasmol.com.br
-  </a>
-</dd>
-
+              <dt><IconWrap aria-hidden="true"><IconBuilding /></IconWrap> Site</dt>
+              <dd>
+                <a href="https://www.brasmol.com.br" target="_blank" rel="noopener noreferrer">
+                  www.brasmol.com.br
+                </a>
+              </dd>
             </List>
 
-<SrOnly>As informações acima incluem CNPJ, endereço, cidade/UF, telefone, e-mails de contato e site institucional.</SrOnly>
+            <SrOnly>
+              As informações acima incluem CNPJ, endereço, cidade/UF, telefone, e-mails de contato e site institucional.
+            </SrOnly>
           </Card>
 
           {/* Card do mapa + ações */}
@@ -459,42 +433,29 @@ export default function ContactCTA() {
               />
             </MapBox>
 
-             <Actions>
-<ActionBtn
-  href={GMAPS_URL}
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="Abrir no Google Maps em nova aba"
-  onMouseMove={onRipple}
->
-  <img 
-    src="/google-maps.png" 
-    alt="Google Maps" 
-    width="20" 
-    height="20" 
-    style={{ display: "inline-block" }} 
-  />
-  Google Maps
-</ActionBtn>
+            <Actions>
+              <ActionBtn
+                href={GMAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir no Google Maps em nova aba"
+                onMouseMove={onRipple}
+              >
+                <img src="/google-maps.png" alt="Google Maps" width="20" height="20" />
+                Google Maps
+              </ActionBtn>
 
-
-  <ActionBtn
-    href={WAZE_URL}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Abrir no Waze em nova aba"
-    onMouseMove={onRipple}
-  >
-    <img 
-      src="/waze.png" 
-      alt="Waze" 
-      width="20" 
-      height="20" 
-      style={{ display: "inline-block" }} 
-    />
-    Waze
-  </ActionBtn>
-</Actions>
+              <ActionBtn
+                href={WAZE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Abrir no Waze em nova aba"
+                onMouseMove={onRipple}
+              >
+                <img src="/waze.png" alt="Waze" width="20" height="20" />
+                Waze
+              </ActionBtn>
+            </Actions>
           </Card>
         </Grid>
       </div>

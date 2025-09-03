@@ -75,11 +75,21 @@ const Bullets = styled.ul`
 
 const Secondary = styled.div`
   margin-top: 18px;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 
   small { color: #6c757d; }
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* empilha */
+    align-items: center;    /* centraliza conteúdo */
+    text-align: center;     /* centraliza texto */
+  }
 `;
+
 
 export default function Services() {
   return (

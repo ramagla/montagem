@@ -75,12 +75,33 @@ const IconWrap = styled.div`
 `;
 
 const Arrow = styled.div`
-  flex: 0 0 auto;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  justify-content: center;
   font-size: 28px;
-  color: #0e4a7b; /* azul escuro */
-  user-select: none;
+  color: #0e4a7b;
+  margin: 12px 0; /* espaço entre card e seta */
+
+  .arrow-right { display: inline; }
+  .arrow-down { display: none; }
+
+  @media (max-width: 768px) {
+    .arrow-right { display: none; }
+    .arrow-down { display: inline; }
+  }
 `;
+
+const ProcessItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* empilha card e seta */
+    align-items: stretch;
+  }
+`;
+
 
 
 export default function Process() {
@@ -146,23 +167,25 @@ export default function Process() {
 
         <Flow role="list" aria-label="Etapas do processo de montagem">
           {steps.map((s, i) => (
-            <div key={i} className="d-flex align-items-center gap-3">
-              <Step role="listitem" itemScope itemType="https://schema.org/HowToStep" tabIndex={0}>
-                <IconWrap aria-hidden="true">
-                  <i className={`bi ${s.icon} fs-3`} />
-                </IconWrap>
-                <h3 className="h6 fw-bold mb-2" itemProp="name">
-                  {i + 1}. {s.title}
-                </h3>
-                <p className="text-muted small mb-0" itemProp="text">{s.desc}</p>
-              </Step>
+            <div key={i} className="process-item">
+  <Step role="listitem" itemScope itemType="https://schema.org/HowToStep" tabIndex={0}>
+    <IconWrap aria-hidden="true">
+      <i className={`bi ${s.icon} fs-3`} />
+    </IconWrap>
+    <h3 className="h6 fw-bold mb-2" itemProp="name">
+      {i + 1}. {s.title}
+    </h3>
+    <p className="text-muted small mb-0" itemProp="text">{s.desc}</p>
+  </Step>
 
-              {i < steps.length - 1 && (
-                <Arrow aria-hidden="true">
-                  <i className="bi bi-arrow-right-circle-fill"></i>
-                </Arrow>
-              )}
-            </div>
+  {i < steps.length - 1 && (
+    <Arrow aria-hidden="true">
+      <i className="bi bi-arrow-right-circle-fill arrow-right"></i>
+      <i className="bi bi-arrow-down-circle-fill arrow-down"></i>
+    </Arrow>
+  )}
+</div>
+
           ))}
         </Flow>
       </div>

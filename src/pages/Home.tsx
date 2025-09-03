@@ -172,7 +172,13 @@ const RichTextSection = styled.section`
   border-top: 1px solid ${({ theme }) => (theme as any).colors.border};
   padding: 40px 0;
   scroll-margin-top: 80px;
+
   p {
     color: #4b5563;
   }
+
+  @media (max-width: 768px) {
+    display: none; /* esconde no mobile */
+  }
 `;
+
