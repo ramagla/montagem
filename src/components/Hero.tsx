@@ -33,13 +33,13 @@ const CTAButton = styled.a`
   font-weight: 600;
   padding: 12px 24px;
   border-radius: 12px;
-  background: ${({ theme }) => (theme as any).colors.brand};
+  background: #0e4a7b; /* azul escuro fixo */
   color: #fff;
   text-decoration: none;
   transition: all 0.2s;
 
   &:hover {
-    background: ${({ theme }) => (theme as any).colors.brandDark || "#083358"};
+    background: #083358; /* tom ainda mais escuro no hover */
     transform: translateY(-2px);
   }
 `;
@@ -67,7 +67,7 @@ export default function Hero() {
           {/* Imagem (à direita em md+) */}
           <div className="col-md-6 text-center order-md-2">
             <img
-              src="https://images.unsplash.com/photo-1581093588401-16ec4f6c1b2a?q=80&w=1200"
+              src="/hero_fabrica.png"  // imagem salva dentro da pasta public/
               className="img-fluid rounded shadow"
               alt="Linha de montagem industrial da Bras-Mol"
               loading="lazy"

@@ -45,9 +45,10 @@ const Card = styled.article`
   }
 
   &:focus-within {
-    outline: 2px solid ${({ theme }) => (theme as any).colors.brand || "#d00"};
-    outline-offset: 2px;
-  }
+  outline: 2px solid #0e4a7b;
+  outline-offset: 2px;
+}
+
 `;
 
 const IconCircle = styled.div`
@@ -72,17 +73,22 @@ const Desc = styled.p`
 
 export default function Quality() {
   const items = [
-    { title: "ISO 9001", desc: "Processos controlados e melhoria contínua.", icon: "bi-patch-check-fill" },
-    { title: "Rastreabilidade", desc: "Lotes e registros por operação e teste.", icon: "bi-search" },
-    { title: "Documentação", desc: "Plano de controle, instruções e registros auditáveis.", icon: "bi-file-earmark-text" },
-  ];
+  { title: "IATF 16949", desc: "Padrões automotivos com foco em qualidade e melhoria contínua.", icon: "bi-patch-check-fill" },
+  { title: "Rastreabilidade", desc: "Registros por operação e teste (lote/amostra).", icon: "bi-search" },
+  { title: "Documentação", desc: "Instruções visuais, plano de controle e registros auditáveis.", icon: "bi-file-earmark-text" },
+  { title: "Boas práticas ISO/IEC 27001", desc: "Controles de segurança da informação aplicados aos processos.", icon: "bi-shield-lock" },
+  { title: "Ambiental (ISO 14001)", desc: "Diretrizes para reduzir impactos e gerir aspectos ambientais.", icon: "bi-droplet" },
+  { title: "LGPD", desc: "Tratamento responsável de dados pessoais e confidenciais.", icon: "bi-shield-check" },
+];
+
+
 
   // JSON-LD como ItemList (reforça SEO do conteúdo da seção)
   const listJsonLd = useMemo(() => {
     const ld = {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "name": "Qualidade e certificações Bras-Mol",
+"name": "Qualidade, conformidade e boas práticas Bras-Mol",
       "itemListElement": items.map((it, i) => ({
         "@type": "ListItem",
         "position": i + 1,
@@ -91,7 +97,7 @@ export default function Quality() {
       })),
     };
     return JSON.stringify(ld);
-  }, []);
+}, [items]);
 
   return (
     <Box id="qualidade" aria-labelledby="qualidade-title">
@@ -99,9 +105,12 @@ export default function Quality() {
         <Head>
           <h2 id="qualidade-title">Qualidade &amp; Certificações</h2>
 <p>
-  Confiabilidade assegurada pela <strong>certificação ISO 9001</strong>, rastreabilidade de lotes
-  e documentação de controle de qualidade em todas as etapas de montagem.
+  Confiabilidade assegurada pela <strong>IATF 16949</strong>, com <strong>rastreabilidade de lotes</strong> e
+  <strong>documentação de controle</strong> em todas as etapas. Seguimos boas práticas da
+  <strong> ISO/IEC 27001</strong>, diretrizes <strong>ambientais (ISO 14001)</strong> e <strong>LGPD</strong>.
 </p>
+
+
         </Head>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listJsonLd }} />

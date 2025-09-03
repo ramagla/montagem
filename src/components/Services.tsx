@@ -132,16 +132,17 @@ export default function Services() {
             <Card itemScope itemType="https://schema.org/Service">
               <CardBody>
                 <IconCircle aria-hidden="true" className="mb-3">
-                  <i className="bi bi-droplet-half fs-5"></i>
-                </IconCircle>
-                <Name itemProp="name">Adesivos &amp; Insertos</Name>
-                <Desc itemProp="description">
-                  Aplicação de adesivos, fitas e insertos conforme especificação técnica.
-                </Desc>
-                <Bullets className="small">
-                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Tempo de cura</li>
-                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Padronização visual</li>
-                </Bullets>
+  <i className="bi bi-nut fs-5"></i>
+</IconCircle>
+<Name itemProp="name">Insertos</Name>
+<Desc itemProp="description">
+  Aplicação de insertos conforme especificação técnica (porca-rebite, roscas, etc.).
+</Desc>
+<Bullets className="small">
+  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Padronização visual</li>
+  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Teste de fixação</li>
+</Bullets>
+
               </CardBody>
             </Card>
           </div>
@@ -156,10 +157,18 @@ export default function Services() {
                 <Desc itemProp="description">
                   Teste funcional e dimensional com registros por lote e amostra.
                 </Desc>
-                <Bullets className="small">
-                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Plano de controle</li>
-                  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Rastreabilidade</li>
-                </Bullets>
+               <Bullets className="small">
+  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Plano de controle</li>
+  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Rastreabilidade</li>
+  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Inspeções dimensionais</li>
+  <li>
+    <i className="bi bi-check2-circle" aria-hidden="true"></i>
+    Instrumentos calibrados RBC: micrômetros, paquímetros, traçador de altura,
+    durômetro e microdurômetro
+  </li>
+  <li><i className="bi bi-check2-circle" aria-hidden="true"></i> Ensaios de resistência à tração</li>
+</Bullets>
+
               </CardBody>
             </Card>
           </div>
@@ -189,10 +198,15 @@ export default function Services() {
             <i className="bi bi-info-circle" aria-hidden="true"></i>
             <small>Processos padronizados, instruções visuais e registros auditáveis.</small>
           </div>
-          <a href="#contato" className="btn btn-outline-danger">
-            <i className="bi bi-envelope-fill me-1" aria-hidden="true"></i>
-            Contato
-          </a>
+          <a
+  href="#contato"
+  className="btn"
+  style={{ background: "#0e4a7b", color: "#fff", borderColor: "transparent" }}
+>
+  <i className="bi bi-envelope-fill me-1" aria-hidden="true"></i>
+  Contato
+</a>
+
         </Secondary>
       </div>
     </Wrap>

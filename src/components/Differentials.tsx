@@ -52,9 +52,10 @@ const Card = styled.article`
   }
 
   &:focus-within {
-    outline: 2px solid ${({ theme }) => (theme as any).colors.brand || "#d00"};
-    outline-offset: 2px;
-  }
+  outline: 2px solid #0e4a7b;
+  outline-offset: 2px;
+}
+
 `;
 
 const Name = styled.h3`
@@ -111,8 +112,11 @@ export default function Differentials() {
           <h2 id="diferenciais-title">Diferenciais da Bras-Mol</h2>
 <p>
   Nossos diferenciais garantem excelência na <strong>montagem terceirizada de subconjuntos</strong>,
-  unindo qualidade, prazo e flexibilidade para indústrias automotivas, linha branca e diversos segmentos.
+  unindo qualidade, prazo e flexibilidade para <strong>Automotivo/Aftermarket</strong>,
+  <strong>Linha Branca</strong>, <strong>Linha Marron</strong>, <strong>Agrícola</strong>,
+  <strong>Máquinas e Equipamentos</strong> e <strong>Indústrias em Geral</strong>.
 </p>
+
         </Head>
 
         {/* Grid */}

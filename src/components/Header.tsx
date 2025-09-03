@@ -12,8 +12,10 @@ const Bar = styled.header`
 const Row = styled.div`
   margin: 0 auto; max-width: ${({theme}) => (theme as any).layout.maxW};
   display: flex; align-items: center; justify-content: space-between;
-  height: 68px; padding: 0 16px;
+  height: 88px; /* aumenta a altura total do header */
+  padding: 0 16px;
 `;
+
 
 const Brand = styled.a`
   display: inline-flex; align-items: center; gap: 10px;
@@ -63,10 +65,11 @@ const NavList = styled.ul`
       border-radius: 14px; background: ${({theme}) => (theme as any).colors.card};
     }
   }
-  a.nav-link.active{
-    background: ${({theme}) => (theme as any).colors.brand};
+    a.nav-link.active{
+    background: #0e4a7b; /* azul escuro */
     color: #fff;
   }
+
 `;
 
 const IDS_SECOES = [
@@ -133,9 +136,10 @@ export default function Header(){
   return (
     <Bar>
       <Row>
-        <Brand href="#hero" aria-label="Bras-Mol - Início">
-          <img src="/logol.png" alt="Bras-Mol" height="40" />
-        </Brand>
+      <Brand href="#hero" aria-label="Bras-Mol - Início">
+  <img src="/logol.png" alt="Bras-Mol" height="60" /> {/* logo maior */}
+</Brand>
+
 
         <BurgerBtn
           aria-label="Alternar navegação"

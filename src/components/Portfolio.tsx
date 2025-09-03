@@ -47,9 +47,10 @@ const Card = styled.article`
   }
 
   &:focus-within {
-    outline: 2px solid ${({ theme }) => (theme as any).colors.brand || "#d00"};
-    outline-offset: 2px;
-  }
+  outline: 2px solid #0e4a7b;
+  outline-offset: 2px;
+}
+
 `;
 
 const IconCircle = styled.div`
@@ -74,17 +75,18 @@ const Desc = styled.p`
 
 export default function Portfolio() {
   const items = [
-    { title: "Conjunto metálico", desc: "Subconjunto com crimpagem e teste funcional.", icon: "bi-gear-wide-connected" },
-    { title: "Conjunto plástico", desc: "Montagem com adesivo técnico e inspeção visual.", icon: "bi-boxes" },
-    { title: "Kit mecânico", desc: "Parafusos, arruelas e embalagem final identificada.", icon: "bi-nut" },
-  ];
+  { title: "Conjunto metálico", desc: "Crimpagem, fixadores e teste funcional com registros por lote.", icon: "bi-gear-wide-connected" },
+  { title: "Conjunto plástico", desc: "Aplicação técnica e inspeção visual conforme plano de controle.", icon: "bi-boxes" },
+  { title: "Kit mecânico", desc: "Parafusos e componentes com embalagem final identificada.", icon: "bi-nut" },
+];
+
 
   // JSON-LD como ItemList para reforçar SEO da seção
   const listJsonLd = useMemo(() => {
     const ld = {
       "@context": "https://schema.org",
       "@type": "ItemList",
-      "name": "Portfólio de subconjuntos (exemplos)",
+"name": "Portfólio de subconjuntos",
       "itemListElement": items.map((it, i) => ({
         "@type": "ListItem",
         "position": i + 1,
@@ -93,18 +95,19 @@ export default function Portfolio() {
       })),
     };
     return JSON.stringify(ld);
-  }, []);
+}, [items]);
 
   return (
     <Box id="portfolio" aria-labelledby="portfolio-title">
       <div className="container">
         {/* Cabeçalho */}
         <Head>
-          <h2 id="portfolio-title">Portfólio (exemplos)</h2>
+          <h2 id="portfolio-title">Portfólio</h2>
 <p>
-  Exemplos de <strong>subconjuntos metálicos, plásticos e kits mecânicos</strong>
-  já desenvolvidos para clientes de diferentes setores industriais.
+  <strong>Subconjuntos metálicos, plásticos e kits mecânicos</strong> com padronização de processos,
+  <strong> rastreabilidade</strong> e identificação final conforme requisitos do cliente.
 </p>
+
         </Head>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listJsonLd }} />

@@ -101,19 +101,37 @@ const CardTitle = styled.h3`
 
 const List = styled.dl`
   display: grid;
-  grid-template-columns: 160px 1fr;
-  row-gap: 10px;
-  column-gap: 14px;
+  grid-template-columns: 180px 1fr;   /* um pouco mais largo pro rótulo */
+  row-gap: 12px;                      /* mais respiro vertical */
+  column-gap: 16px;
   margin: 0;
 
-  dt { font-weight: 700; opacity: .9; }
-  dd { margin: 0; opacity: .96; display: inline-flex; align-items: center; gap: 10px; }
+  /* rótulos com ícone + texto alinhados */
+  dt{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;                         /* espaço entre ícone e texto */
+    font-weight: 700;
+    opacity: .9;
+    line-height: 1.2;
+  }
+
+  /* valores igualmente alinhados */
+  dd{
+    margin: 0;
+    opacity: .96;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;                        /* espaço entre elementos no valor */
+    line-height: 1.2;
+  }
 
   @media (max-width: 700px) {
     grid-template-columns: 1fr;
-    dt { margin-top: 8px; }
+    dt{ margin-top: 8px; }
   }
 `;
+
 
 /* Botões e Ações */
 const Actions = styled.div`
@@ -155,10 +173,13 @@ const ActionBtn = styled.a`
 `;
 
 const PrimaryBtn = styled(ActionBtn)`
-  background: ${({ theme }) => (theme as any).colors?.brand || "#2563eb"};
-  color: #fff;
+  background: #fff;
+  color: ${({ theme }) => (theme as any).colors?.brand || "#2563eb"};
   border-color: ${({ theme }) => (theme as any).colors?.brand || "#2563eb"};
+  /* contraste melhor ao passar o mouse */
+  &:hover { box-shadow: 0 8px 16px rgba(0,0,0,.06); transform: translateY(-1px); }
 `;
+
 
 const IconWrap = styled.span`
   display: inline-flex; width: 18px; height: 18px; align-items: center; justify-content: center;
@@ -325,9 +346,10 @@ export default function ContactCTA() {
             Contato oficial
           </Eyebrow>
 <Title id="contato-title">
-  Contato oficial da Bras-Mol para serviços de montagem
+  Contato oficial da Bras-Mol
 </Title>
-          <Subtitle>Entre em contato por telefone ou e-mail, ou trace sua rota pelo mapa.</Subtitle>
+<Subtitle>Fale por telefone ou e-mail e trace sua rota pelo mapa.</Subtitle>
+
         </Header>
 
         <Grid>
@@ -339,57 +361,83 @@ export default function ContactCTA() {
             </CardHeader>
 
             <List>
-              <dt>CNPJ</dt>
-              <dd>
-                <span itemProp="taxID">{CNPJ}</span>
-                <button
-                  type="button"
-                  onClick={() => copyToClipboard(CNPJ)}
-                  aria-label={`Copiar CNPJ ${CNPJ}`}
-                  style={{
-                    border: "1px solid rgba(0,0,0,.08)",
-                    background: "transparent",
-                    borderRadius: 8,
-                    padding: "4px 6px",
-                    cursor: "pointer",
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 6
-                  }}
-                >
-                  <IconCopy /> <span style={{fontSize:12,fontWeight:700}}>Copiar</span>
-                </button>
-              </dd>
+              <dt>
+  <IconWrap aria-hidden="true"><IconBuilding /></IconWrap>
+  CNPJ
+</dt>
+<dd>
+  <span itemProp="taxID">{CNPJ}</span>
+  <button
+    type="button"
+    onClick={() => copyToClipboard(CNPJ)}
+    aria-label={`Copiar CNPJ ${CNPJ}`}
+    style={{
+      border: "1px solid rgba(0,0,0,.08)",
+      background: "transparent",
+      borderRadius: 8,
+      padding: "4px 6px",
+      cursor: "pointer",
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 6
+    }}
+  >
+    <IconCopy /> <span style={{fontSize:12,fontWeight:700}}>Copiar</span>
+  </button>
+</dd>
 
-              <dt>Endereço</dt>
-              <dd>
-                <IconWrap aria-hidden="true"><IconMapPin /></IconWrap>
-                <span itemProp="address">{ENDERECO_TXT}</span>
-              </dd>
+<dt>
+  <IconWrap aria-hidden="true"><IconMapPin /></IconWrap>
+  Endereço
+</dt>
+<dd>
+  <span itemProp="address">{ENDERECO_TXT}</span>
+</dd>
 
-              <dt>Cidade/UF</dt>
-              <dd>Itaquaquecetuba / SP</dd>
+<dt>
+  <IconWrap aria-hidden="true"><IconBuilding /></IconWrap>
+  Cidade/UF
+</dt>
+<dd>Itaquaquecetuba / SP</dd>
 
-              <dt>Telefone</dt>
-              <dd>
-                <IconWrap aria-hidden="true"><IconPhone /></IconWrap>
-                <a href={telHref} itemProp="telephone" aria-label={`Ligar para ${FONE}`}>{FONE}</a>
-              </dd>
+<dt>
+  <IconWrap aria-hidden="true"><IconPhone /></IconWrap>
+  Telefone
+</dt>
+<dd>
+  <a href={telHref} itemProp="telephone" aria-label={`Ligar para ${FONE}`}>{FONE}</a>
+</dd>
 
-              <dt>E-mail SAC</dt>
-              <dd>
-                <IconWrap aria-hidden="true"><IconMail /></IconWrap>
-                <a href={`mailto:${EMAIL_SAC}`} itemProp="email">{EMAIL_SAC}</a>
-              </dd>
+<dt>
+  <IconWrap aria-hidden="true"><IconMail /></IconWrap>
+  E-mail SAC
+</dt>
+<dd>
+  <a href={`mailto:${EMAIL_SAC}`} itemProp="email">{EMAIL_SAC}</a>
+</dd>
 
-              <dt>E-mail Vendas</dt>
-              <dd>
-                <IconWrap aria-hidden="true"><IconMail /></IconWrap>
-                <a href={`mailto:${EMAIL_VENDAS}`} itemProp="email">{EMAIL_VENDAS}</a>
-              </dd>
+<dt>
+  <IconWrap aria-hidden="true"><IconMail /></IconWrap>
+  E-mail Vendas
+</dt>
+<dd>
+  <a href={`mailto:${EMAIL_VENDAS}`} itemProp="email">{EMAIL_VENDAS}</a>
+</dd>
+
+{/* NOVO: Site institucional */}
+<dt>
+  <IconWrap aria-hidden="true"><IconBuilding /></IconWrap>
+  Site
+</dt>
+<dd>
+  <a href="https://www.brasmol.com.br" target="_blank" rel="noopener noreferrer">
+    www.brasmol.com.br
+  </a>
+</dd>
+
             </List>
 
-            <SrOnly>As informações acima incluem CNPJ, endereço, telefone e e-mails de contato.</SrOnly>
+<SrOnly>As informações acima incluem CNPJ, endereço, cidade/UF, telefone, e-mails de contato e site institucional.</SrOnly>
           </Card>
 
           {/* Card do mapa + ações */}
@@ -411,29 +459,42 @@ export default function ContactCTA() {
               />
             </MapBox>
 
-            <Actions>
-              <PrimaryBtn
-                href={GMAPS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir no Google Maps em nova aba"
-                onMouseMove={onRipple}
-              >
-                <IconWrap><IconGMaps /></IconWrap>
-                Google Maps
-              </PrimaryBtn>
+             <Actions>
+<ActionBtn
+  href={GMAPS_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Abrir no Google Maps em nova aba"
+  onMouseMove={onRipple}
+>
+  <img 
+    src="/google-maps.png" 
+    alt="Google Maps" 
+    width="20" 
+    height="20" 
+    style={{ display: "inline-block" }} 
+  />
+  Google Maps
+</ActionBtn>
 
-              <ActionBtn
-                href={WAZE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir no Waze em nova aba"
-                onMouseMove={onRipple}
-              >
-                <IconWrap><IconWaze /></IconWrap>
-                Waze
-              </ActionBtn>
-            </Actions>
+
+  <ActionBtn
+    href={WAZE_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir no Waze em nova aba"
+    onMouseMove={onRipple}
+  >
+    <img 
+      src="/waze.png" 
+      alt="Waze" 
+      width="20" 
+      height="20" 
+      style={{ display: "inline-block" }} 
+    />
+    Waze
+  </ActionBtn>
+</Actions>
           </Card>
         </Grid>
       </div>

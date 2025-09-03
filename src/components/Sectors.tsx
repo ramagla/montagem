@@ -71,27 +71,38 @@ const Desc = styled.p`
 
 export default function Sectors() {
   const sectors = [
-    {
-      icon: "bi-truck",
-      title: "Automotivo",
-      desc: "Subconjuntos com rastreabilidade e conformidade com requisitos IATF.",
-    },
-    {
-      icon: "bi-house-gear",
-      title: "Linha Branca",
-      desc: "Conjuntos para eletrodomésticos com alto volume de produção.",
-    },
-    {
-      icon: "bi-cpu",
-      title: "Máquinas e Equipamentos",
-      desc: "Montagem de subconjuntos industriais conforme projeto técnico.",
-    },
-    {
-      icon: "bi-buildings",
-      title: "Outros",
-      desc: "Atendemos indústrias em geral mantendo o padrão de qualidade Bras-Mol.",
-    },
-  ];
+  {
+    icon: "bi-gear-wide-connected",
+    title: "Automotivo/Aftermarket",
+    desc: "Subconjuntos e kits para reposição/acessórios, com rastreabilidade e requisitos IATF.",
+  },
+  {
+    icon: "bi-house-gear",
+    title: "Linha Branca",
+    desc: "Conjuntos para eletrodomésticos com alto volume de produção.",
+  },
+  {
+    icon: "bi-tv",
+    title: "Linha Marron",
+    desc: "Eletrônicos/áudio-vídeo; montagem com testes funcionais e visuais.",
+  },
+  {
+    icon: "bi-tree",
+    title: "Agrícola",
+    desc: "Componentes e subconjuntos para máquinas e implementos agrícolas.",
+  },
+  {
+    icon: "bi-cpu",
+    title: "Máquinas e Equipamentos",
+    desc: "Montagem de subconjuntos industriais conforme projeto técnico.",
+  },
+  {
+    icon: "bi-buildings",
+    title: "Indústrias em Geral",
+    desc: "Soluções sob medida mantendo o padrão de qualidade Bras-Mol.",
+  },
+];
+
 
   return (
     <Wrap id="setores" aria-labelledby="setores-title">
@@ -100,13 +111,16 @@ export default function Sectors() {
         <Head>
           <h2 id="setores-title">Setores atendidos</h2>
 <p>
-  Atuamos em setores automotivo, linha branca, máquinas e equipamentos e outros ramos industriais,
-  oferecendo <strong>soluções de montagem sob medida</strong> com conformidade e rastreabilidade.
+  Atuamos em <strong>Automotivo/Aftermarket</strong>, <strong>Linha Branca</strong>,
+  <strong>Linha Marron</strong>, <strong>Agrícola</strong>, <strong>Máquinas e Equipamentos</strong> e
+  <strong>Indústrias em Geral</strong>, oferecendo soluções de montagem sob medida,
+  com conformidade e rastreabilidade.
 </p>
+
         </Head>
 
         {/* Grid de setores */}
-        <div className="row g-4" role="list">
+<div className="row g-4 justify-content-center" role="list">
           {sectors.map((s, i) => (
             <div className="col-md-6 col-lg-3" role="listitem" key={i}>
               <Card tabIndex={0}>

@@ -31,51 +31,26 @@ const Head = styled.header`
 `;
 
 const Flow = styled.div`
-  position: relative;
   display: flex;
+  flex-wrap: wrap;              /* quebra em múltiplas linhas */
   justify-content: center;
   align-items: stretch;
   gap: 24px;
-  overflow-x: auto;
-  padding: 6px 8px 12px;
-  scroll-snap-type: x mandatory;
-
-  /* suaviliza rolagem em dispositivos que suportam */
-  scroll-behavior: smooth;
-
-  /* barra de rolagem discreta */
-  &::-webkit-scrollbar { height: 8px; }
-  &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => (theme as any).colors.border};
-    border-radius: 4px;
-  }
-
-  /* fades laterais para indicar que há mais conteúdo */
-  &::before,
-  &::after{
-    content:"";
-    position:absolute; top:0; bottom:0; width:24px;
-    pointer-events:none;
-  }
-  &::before{
-    left:0;
-    background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0));
-  }
-  &::after{
-    right:0;
-    background: linear-gradient(270deg, rgba(255,255,255,1), rgba(255,255,255,0));
-  }
+  padding: 6px 8px 0;           /* remove área do scrollbar */
+  overflow: visible;            /* sem rolagem horizontal */
 `;
 
-const Step = styled.article`
-  scroll-snap-align: start;
-  min-width: 240px;
+
+const Step = styled.div`
+  flex: 1 1 220px;              /* ocupa espaço proporcional e reduzido */
+  max-width: 260px;             /* evita que os cards fiquem largos demais */
   background: #fff;
   border: 1px solid ${({ theme }) => (theme as any).colors.border};
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,.05);
   padding: 20px;
   text-align: center;
+  position: relative;
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 
   &:hover {
@@ -85,7 +60,7 @@ const Step = styled.article`
   }
 
   &:focus-within {
-    outline: 2px solid ${({ theme }) => (theme as any).colors.brand || "#d00"};
+    outline: 2px solid ${({ theme }) => (theme as any).colors.brandDark || "#083358"};
     outline-offset: 2px;
   }
 `;
@@ -103,9 +78,10 @@ const Arrow = styled.div`
   flex: 0 0 auto;
   display: flex; align-items: center; justify-content: center;
   font-size: 28px;
-  color: ${({ theme }) => (theme as any).colors.brand || "#d00"};
+  color: #0e4a7b; /* azul escuro */
   user-select: none;
 `;
+
 
 export default function Process() {
   const steps = [
@@ -125,10 +101,11 @@ export default function Process() {
       icon: "bi-truck",
     },
     {
-      title: "Montagem e inspeção",
-      desc: "Execução com testes conforme plano de controle.",
-      icon: "bi-search-check",
-    },
+  title: "Montagem e inspeção",
+  desc: "Execução com testes conforme plano de controle.",
+  icon: "bi-check2-circle" // ícone existente
+},
+
     {
       title: "Expedição",
       desc: "Etiquetagem, embalagem e documentação final.",
@@ -151,7 +128,7 @@ export default function Process() {
       })),
     };
     return JSON.stringify(ld);
-  }, []);
+}, [steps]);
 
   return (
     <Wrap id="processo" aria-labelledby="processo-title">
@@ -159,9 +136,10 @@ export default function Process() {
         <Head>
           <h2 id="processo-title">Como trabalhamos</h2>
 <p>
-  Nosso processo de <strong>montagem terceirizada</strong> segue etapas padronizadas — do briefing técnico à expedição —
-  assegurando qualidade, rastreabilidade total e cumprimento rigoroso de prazos.
+  Nosso processo de <strong>montagem terceirizada</strong> segue etapas padronizadas — do briefing técnico à expedição —,
+  assegurando <strong>qualidade</strong>, <strong>rastreabilidade de lotes</strong> e cumprimento rigoroso de prazos.
 </p>
+
         </Head>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: howToJsonLd }} />

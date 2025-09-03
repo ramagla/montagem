@@ -83,7 +83,12 @@ export default function Footer() {
         </TopRow>
 
         <BottomRow>
-          <div>© {new Date().getFullYear()} Bras-Mol Molas &amp; Estampados</div>
+<div>
+  © {new Date().getFullYear()} Bras-Mol Molas &amp; Estampados • 
+  <a href="https://www.brasmol.com.br" target="_blank" rel="noopener noreferrer">
+    www.brasmol.com.br
+  </a>
+</div>
 
           <address
             style={{ margin: 0 }}
